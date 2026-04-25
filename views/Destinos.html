@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brujula Sur | Destinos</title>
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body class="d-flex flex-column min-vh-100" style="background-color: #f4f8fb;">
+    <div id="navbar"></div>
+
+    <main class="flex-grow-1">
+        <div id="destinations-hero"></div>
+        <div id="destinations-filters"></div>
+        <div id="destinations-gallery"></div>
+        <div id="destinations-table"></div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(function () {
+            $("#navbar").load("../components/navbar.html", function () {
+                const links = $("#navbar .nav-link");
+
+                links.removeClass("bg-white bg-opacity-10");
+                links.css("color", "#ffffff");
+
+                const destinosLink = links.filter(function () {
+                    return $(this).attr("href") === "../views/Destinos.html";
+                });
+
+                destinosLink.addClass("bg-white bg-opacity-10");
+                destinosLink.css("color", "#8fe7ff");
+            });
+
+            $("#destinations-hero").load("../components/destinations-hero.html");
+
+            $("#destinations-filters").load("../components/destinations-filters.html", function () {
+                let activeCategory = "all";
+
+                const applyFilters = () => {
+                    const region = $("#destinations-region-filter").val();
+                    const items = $("#destinations-grid .destination-item");
+
+                    items.hide();
+
+                    const filteredItems = items.filter(function () {
+                        const item = $(this);
+                        const itemCategories = String(item.data("category")).split(" ");
+                        const itemRegion = String(item.data("region"));
+                        const categoryMatch = activeCategory === "all" || itemCategories.includes(activeCategory);
+                        const regionMatch = region === "all" || itemRegion === region;
+
+                        return categoryMatch && regionMatch;
+                    });
+
+                    filteredItems.show();
+
+                    if (filteredItems.length === 0) {
+                        $("#destinations-empty-state").removeClass("d-none").show();
+                    } else {
+                        $("#destinations-empty-state").hide();
+                    }
+                };
+
+                $(".destination-chip").on("click", function () {
+                    const chip = $(this);
+
+                    activeCategory = chip.data("category");
+
+                    $(".destination-chip").removeClass("active");
+                    $(".destination-chip")
+                        .css({
+                            "background-color": "#ffffff",
+                            "color": "#0a1a2f",
+                            "border": "1px solid #d4e3ef"
+                        });
+
+                    chip.addClass("active");
+                    chip.css({
+                        "background-color": "#0a1a2f",
+                        "color": "#ffffff",
+                        "border": "1px solid #0a1a2f"
+                    });
+
+                    applyFilters();
+                });
+
+                $("#destinations-region-filter").on("change", function () {
+                    applyFilters();
+                });
+
+                applyFilters();
+            });
+
+            $("#destinations-gallery").load("../components/destinations-gallery.html");
+            $("#destinations-table").load("../components/destinations-table.html");
+            $("#footer").load("../components/footer.html");
+        });
+    </script>
+</body>
+
+</html>

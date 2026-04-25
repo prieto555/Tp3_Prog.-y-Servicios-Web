@@ -1,0 +1,105 @@
+<section class="py-5" style="background-color: #f7fbff;">
+    <style>
+        @media (max-width: 767.98px) {
+            .destinations-table-responsive table,
+            .destinations-table-responsive thead,
+            .destinations-table-responsive tbody,
+            .destinations-table-responsive th,
+            .destinations-table-responsive td,
+            .destinations-table-responsive tr {
+                display: block;
+            }
+
+            .destinations-table-responsive thead {
+                display: none;
+            }
+
+            .destinations-table-responsive tbody tr {
+                padding: 1rem;
+                border-bottom: 1px solid #d4e3ef;
+                background-color: #ffffff;
+            }
+
+            .destinations-table-responsive tbody tr:last-child {
+                border-bottom: 0;
+            }
+
+            .destinations-table-responsive tbody td {
+                border: 0;
+                padding: 0.35rem 0;
+            }
+
+            .destinations-table-responsive tbody td::before {
+                content: attr(data-label);
+                display: block;
+                margin-bottom: 0.15rem;
+                color: #6c757d;
+                font-size: 0.78rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.04em;
+            }
+        }
+    </style>
+    <div class="container">
+        <div class="row justify-content-center justify-content-lg-start mb-4">
+            <div class="col-12 col-lg-8">
+                <h2 class="display-6 fw-bold mb-3" style="color: #0a1a2f;">Precios orientativos</h2>
+                <p class="mb-0 text-secondary">
+                    Comparacion rapida de algunos destinos destacados con categoria, duracion sugerida y precio estimado por persona.
+                </p>
+            </div>
+        </div>
+
+        <div class="table-responsive destinations-table-responsive rounded-4 border overflow-hidden" style="border-color: #d4e3ef !important; box-shadow: 0 12px 28px rgba(10, 26, 47, 0.08);">
+            <table class="table align-middle mb-0">
+                <thead style="background-color: #eef5fb;">
+                    <tr>
+                        <th class="fw-semibold border-0 px-4 py-3" style="color: #6c757d;">Destino</th>
+                        <th class="fw-semibold border-0 px-4 py-3" style="color: #6c757d;">Categoria</th>
+                        <th class="fw-semibold border-0 px-4 py-3" style="color: #6c757d;">Duracion</th>
+                        <th class="fw-semibold border-0 px-4 py-3" style="color: #6c757d;">Temporada ideal</th>
+                        <th class="fw-semibold border-0 px-4 py-3" style="color: #6c757d;">Precio desde</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="px-4 py-3" data-label="Destino">Buenos Aires</td>
+                        <td class="px-4 py-3" data-label="Categoria">Cultural</td>
+                        <td class="px-4 py-3" data-label="Duracion">3 dias</td>
+                        <td class="px-4 py-3" data-label="Temporada ideal">Todo el ano</td>
+                        <td class="px-4 py-3 fw-semibold" data-label="Precio desde" style="color: #00a2d6;">$180.000</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-3" data-label="Destino">Patagonia</td>
+                        <td class="px-4 py-3" data-label="Categoria">Naturaleza</td>
+                        <td class="px-4 py-3" data-label="Duracion">5 dias</td>
+                        <td class="px-4 py-3" data-label="Temporada ideal">Octubre a marzo</td>
+                        <td class="px-4 py-3 fw-semibold" data-label="Precio desde" style="color: #00a2d6;">$420.000</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-3" data-label="Destino">Costa Atlantica</td>
+                        <td class="px-4 py-3" data-label="Categoria">Sol y playa</td>
+                        <td class="px-4 py-3" data-label="Duracion">4 dias</td>
+                        <td class="px-4 py-3" data-label="Temporada ideal">Diciembre a febrero</td>
+                        <td class="px-4 py-3 fw-semibold" data-label="Precio desde" style="color: #00a2d6;">$230.000</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-3" data-label="Destino">Mendoza</td>
+                        <td class="px-4 py-3" data-label="Categoria">Gastronomico</td>
+                        <td class="px-4 py-3" data-label="Duracion">4 dias</td>
+                        <td class="px-4 py-3" data-label="Temporada ideal">Marzo a mayo</td>
+                        <td class="px-4 py-3 fw-semibold" data-label="Precio desde" style="color: #00a2d6;">$310.000</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-3" data-label="Destino">Lujan</td>
+                        <td class="px-4 py-3" data-label="Categoria">Religioso</td>
+                        <td class="px-4 py-3" data-label="Duracion">2 dias</td>
+                        <td class="px-4 py-3" data-label="Temporada ideal">Abril a noviembre</td>
+                        <td class="px-4 py-3 fw-semibold" data-label="Precio desde" style="color: #00a2d6;">$95.000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,179 @@
+<section class="py-5" style="background: linear-gradient(180deg, #f7fbff 0%, #eef5fb 100%);">
+    <style>
+        .destination-card-visual {
+            overflow: hidden;
+        }
+
+        .destination-card-image {
+            transition: transform 0.45s ease, filter 0.45s ease;
+            transform-origin: center;
+        }
+
+        .destination-item article {
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .destination-item article:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 36px rgba(10, 26, 47, 0.14) !important;
+        }
+
+        .destination-item article:hover .destination-card-image {
+            transform: scale(1.08);
+            filter: saturate(1.05);
+        }
+    </style>
+    <div class="container">
+        <div class="row g-4 mb-4 align-items-end">
+            <div class="col-12 col-lg-8">
+                <h2 class="display-6 fw-bold mb-3" style="color: #0a1a2f;">Destinos destacados</h2>
+                <p class="mb-0 text-secondary">
+                    Combina filtros por categoria y region para descubrir opciones que se ajusten mejor a tu proximo viaje.
+                </p>
+            </div>
+
+            <div class="col-12 col-lg-4">
+                <label for="destinations-region-filter" class="form-label fw-semibold mb-2" style="color: #0a1a2f;">Region</label>
+                <select id="destinations-region-filter" class="form-select" style="min-height: 48px; border-color: #d4e3ef;">
+                    <option value="all" selected>Todas las regiones</option>
+                    <option value="centro">Centro</option>
+                    <option value="sur">Sur</option>
+                    <option value="costa">Costa</option>
+                    <option value="cuyo">Cuyo</option>
+                    <option value="buenos-aires">Buenos Aires</option>
+                    <option value="norte">Norte</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="d-flex flex-wrap gap-2 mb-4">
+            <button type="button" class="btn rounded-pill px-3 py-2 fw-semibold destination-chip active" data-category="all" style="background-color: #0a1a2f; color: #ffffff;">Todos</button>
+            <button type="button" class="btn rounded-pill px-3 py-2 fw-semibold destination-chip" data-category="cultural" style="background-color: #ffffff; color: #0a1a2f; border: 1px solid #d4e3ef;">Cultural</button>
+            <button type="button" class="btn rounded-pill px-3 py-2 fw-semibold destination-chip" data-category="naturaleza" style="background-color: #ffffff; color: #0a1a2f; border: 1px solid #d4e3ef;">Naturaleza</button>
+            <button type="button" class="btn rounded-pill px-3 py-2 fw-semibold destination-chip" data-category="sol" style="background-color: #ffffff; color: #0a1a2f; border: 1px solid #d4e3ef;">Sol y playa</button>
+            <button type="button" class="btn rounded-pill px-3 py-2 fw-semibold destination-chip" data-category="gastronomico" style="background-color: #ffffff; color: #0a1a2f; border: 1px solid #d4e3ef;">Gastronomico</button>
+            <button type="button" class="btn rounded-pill px-3 py-2 fw-semibold destination-chip" data-category="religioso" style="background-color: #ffffff; color: #0a1a2f; border: 1px solid #d4e3ef;">Religioso</button>
+        </div>
+
+        <div class="row g-4" id="destinations-grid">
+            <div class="col-12 col-md-6 col-xl-4 destination-item" data-category="cultural" data-region="centro">
+                <article class="card h-100 border-0 rounded-4 overflow-hidden" style="box-shadow: 0 14px 30px rgba(10, 26, 47, 0.10);">
+                    <div class="position-relative destination-card-visual">
+                        <img
+                            src="https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?auto=format&fit=crop&w=900&q=80"
+                            alt="Arquitectura historica en Buenos Aires"
+                            class="w-100 destination-card-image"
+                            style="height: 250px; object-fit: cover;"
+                        >
+                        <span class="badge rounded-pill position-absolute top-0 start-0 m-3" style="background-color: rgba(10, 26, 47, 0.82);">Cultural</span>
+                    </div>
+                    <div class="card-body p-4">
+                        <h3 class="h4 fw-bold mb-2" style="color: #0a1a2f;">Buenos Aires</h3>
+                        <p class="text-secondary mb-3">Teatros, barrios emblematicos y una agenda cultural siempre activa.</p>
+                        <p class="small mb-0" style="color: #00a2d6;">Ideal para recorrer museos, arquitectura y vida urbana.</p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-12 col-md-6 col-xl-4 destination-item" data-category="naturaleza" data-region="sur">
+                <article class="card h-100 border-0 rounded-4 overflow-hidden" style="box-shadow: 0 14px 30px rgba(10, 26, 47, 0.10);">
+                    <div class="position-relative destination-card-visual">
+                        <img
+                            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80"
+                            alt="Lago y montanas en la Patagonia"
+                            class="w-100 destination-card-image"
+                            style="height: 250px; object-fit: cover;"
+                        >
+                        <span class="badge rounded-pill position-absolute top-0 start-0 m-3" style="background-color: rgba(10, 26, 47, 0.82);">Naturaleza</span>
+                    </div>
+                    <div class="card-body p-4">
+                        <h3 class="h4 fw-bold mb-2" style="color: #0a1a2f;">Patagonia</h3>
+                        <p class="text-secondary mb-3">Senderos, glaciares y postales inmensas para una escapada natural.</p>
+                        <p class="small mb-0" style="color: #00a2d6;">Perfecto para trekking, paisajes y aventura al aire libre.</p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-12 col-md-6 col-xl-4 destination-item" data-category="sol" data-region="costa">
+                <article class="card h-100 border-0 rounded-4 overflow-hidden" style="box-shadow: 0 14px 30px rgba(10, 26, 47, 0.10);">
+                    <div class="position-relative destination-card-visual">
+                        <img
+                            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80"
+                            alt="Playa con arena clara y mar azul"
+                            class="w-100 destination-card-image"
+                            style="height: 250px; object-fit: cover;"
+                        >
+                        <span class="badge rounded-pill position-absolute top-0 start-0 m-3" style="background-color: rgba(10, 26, 47, 0.82);">Sol y playa</span>
+                    </div>
+                    <div class="card-body p-4">
+                        <h3 class="h4 fw-bold mb-2" style="color: #0a1a2f;">Costa Atlantica</h3>
+                        <p class="text-secondary mb-3">Playas amplias, relax frente al mar y opciones para toda la familia.</p>
+                        <p class="small mb-0" style="color: #00a2d6;">Una propuesta clasica para descansar con vista al mar.</p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-12 col-md-6 col-xl-4 destination-item" data-category="gastronomico" data-region="cuyo">
+                <article class="card h-100 border-0 rounded-4 overflow-hidden" style="box-shadow: 0 14px 30px rgba(10, 26, 47, 0.10);">
+                    <div class="position-relative destination-card-visual">
+                        <img
+                            src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=80"
+                            alt="Mesa con platos regionales y copas"
+                            class="w-100 destination-card-image"
+                            style="height: 250px; object-fit: cover;"
+                        >
+                        <span class="badge rounded-pill position-absolute top-0 start-0 m-3" style="background-color: rgba(10, 26, 47, 0.82);">Gastronomico</span>
+                    </div>
+                    <div class="card-body p-4">
+                        <h3 class="h4 fw-bold mb-2" style="color: #0a1a2f;">Mendoza</h3>
+                        <p class="text-secondary mb-3">Vinos, restaurantes de autor y experiencias entre bodegas.</p>
+                        <p class="small mb-0" style="color: #00a2d6;">Pensado para degustaciones, maridajes y cocina regional.</p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-12 col-md-6 col-xl-4 destination-item" data-category="religioso" data-region="buenos-aires">
+                <article class="card h-100 border-0 rounded-4 overflow-hidden" style="box-shadow: 0 14px 30px rgba(10, 26, 47, 0.10);">
+                    <div class="position-relative destination-card-visual">
+                        <img
+                            src="https://images.unsplash.com/photo-1524499982521-1ffd58dd89ea?auto=format&fit=crop&w=900&q=80"
+                            alt="Basilica e iglesia con peregrinos"
+                            class="w-100 destination-card-image"
+                            style="height: 250px; object-fit: cover;"
+                        >
+                        <span class="badge rounded-pill position-absolute top-0 start-0 m-3" style="background-color: rgba(10, 26, 47, 0.82);">Religioso</span>
+                    </div>
+                    <div class="card-body p-4">
+                        <h3 class="h4 fw-bold mb-2" style="color: #0a1a2f;">Lujan</h3>
+                        <p class="text-secondary mb-3">Tradicion, peregrinaciones y espacios de gran valor espiritual.</p>
+                        <p class="small mb-0" style="color: #00a2d6;">Un destino sereno para encuentros, fe y patrimonio religioso.</p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-12 col-md-6 col-xl-4 destination-item" data-category="cultural naturaleza" data-region="norte">
+                <article class="card h-100 border-0 rounded-4 overflow-hidden" style="box-shadow: 0 14px 30px rgba(10, 26, 47, 0.10);">
+                    <div class="position-relative destination-card-visual">
+                        <img
+                            src="https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=900&q=80"
+                            alt="Montanas coloridas del norte argentino"
+                            class="w-100 destination-card-image"
+                            style="height: 250px; object-fit: cover;"
+                        >
+                        <span class="badge rounded-pill position-absolute top-0 start-0 m-3" style="background-color: rgba(10, 26, 47, 0.82);">Naturaleza y cultural</span>
+                    </div>
+                    <div class="card-body p-4">
+                        <h3 class="h4 fw-bold mb-2" style="color: #0a1a2f;">Norte Argentino</h3>
+                        <p class="text-secondary mb-3">Colores intensos, pueblos historicos y paisajes unicos del altiplano.</p>
+                        <p class="small mb-0" style="color: #00a2d6;">Combina rutas escenicas, historia local y tradiciones vivas.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <div id="destinations-empty-state" class="d-none text-center rounded-4 p-4 mt-4 border" style="background-color: #ffffff; border-color: #d4e3ef !important;">
+            <h3 class="h5 fw-bold mb-2" style="color: #0a1a2f;">No encontramos resultados</h3>
+            <p class="mb-0 text-secondary">Prueba con otra categoria o vuelve a seleccionar todas las regiones.</p>
+        </div>
+    </div>
+</section>
