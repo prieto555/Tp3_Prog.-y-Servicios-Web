@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+  <title id="title">Logo Andina Travel</title>
+  <desc id="desc">Logo con montanas y sol para Andina Travel.</desc>
+  <rect width="320" height="320" rx="40" fill="#eef7fc"/>
+  <circle cx="235" cy="92" r="34" fill="#00c3ff"/>
+  <path d="M62 214l50-68 36 46 28-35 82 57H62z" fill="#0a1a2f"/>
+  <path d="M90 214l24-34 20 25 18-22 44 31H90z" fill="#2b5878"/>
+  <text x="160" y="258" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#0a1a2f">ANDINA</text>
+  <text x="160" y="286" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#2b5878">TRAVEL</text>
+</svg>

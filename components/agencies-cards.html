@@ -1,0 +1,342 @@
+<style>
+    .agencies-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 24px;
+    }
+
+    .agency-card {
+        min-height: 370px;
+        perspective: 1000px;
+    }
+
+    .agency-flip-inner {
+        position: relative;
+        min-height: 370px;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform 0.7s ease;
+    }
+
+    .agency-card:hover .agency-flip-inner,
+    .agency-card.is-flipped .agency-flip-inner {
+        transform: rotateY(180deg);
+    }
+
+    .agency-face {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 28px 22px;
+        border-radius: 18px;
+        backface-visibility: hidden;
+        box-shadow: 0 12px 28px rgba(10, 26, 47, 0.12);
+        cursor: pointer;
+        transition: box-shadow 0.3s ease;
+    }
+
+    .agency-flip-btn {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        right: 16px;
+        bottom: 16px;
+        width: 44px;
+        height: 44px;
+        border: 0;
+        border-radius: 50%;
+        background-color: #00c3ff;
+        color: #0a1a2f;
+        box-shadow: 0 10px 20px rgba(10, 26, 47, 0.18);
+        cursor: pointer;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .agency-flip-btn:hover,
+    .agency-flip-btn:focus-visible {
+        background-color: #7adfff;
+        transform: translateY(-2px);
+    }
+
+    .agency-flip-btn i {
+        font-size: 22px;
+        line-height: 1;
+    }
+
+    .agency-card:hover .agency-face {
+        box-shadow: 0 18px 34px rgba(10, 26, 47, 0.16);
+    }
+
+    .agency-card:not(:hover):not(.is-flipped) .agency-back,
+    .agency-card:hover .agency-front,
+    .agency-card.is-flipped .agency-front {
+        pointer-events: none;
+    }
+
+    .agency-front {
+        background-color: #ffffff;
+        border: 1px solid #e6eef5;
+    }
+
+    .agency-back {
+        background-color: #0a1a2f;
+        color: #ffffff;
+        transform: rotateY(180deg);
+    }
+
+    .agency-logo {
+        width: 84px;
+        height: 84px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 18px;
+        border: 3px solid #dff2fb;
+        background-color: #ffffff;
+    }
+
+    .agency-rating,
+    .rating-interactive {
+        display: inline-flex;
+        gap: 4px;
+    }
+
+    .agency-rating i,
+    .rating-interactive i {
+        color: #ffbf3f;
+        font-size: 22px;
+        line-height: 1;
+    }
+
+    .agency-rating .bi-star {
+        color: #c8d7e4;
+    }
+
+    .agency-rating.user-rated {
+        margin-top: 2px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background-color: #fff7df;
+        box-shadow: 0 8px 18px rgba(255, 191, 63, 0.18);
+    }
+
+    .rating-interactive i {
+        color: #c8d7e4;
+        cursor: pointer;
+        transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .rating-interactive i.active,
+    .rating-interactive i.preview {
+        color: #ffbf3f;
+    }
+
+    .rating-interactive i.preview {
+        transform: scale(1.12);
+    }
+
+    .agency-success {
+        display: none;
+        color: #9ee8ff;
+    }
+
+    @media (max-width: 992px) {
+        .agencies-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 768px) {
+        .agencies-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .agency-card,
+        .agency-flip-inner {
+            min-height: 340px;
+        }
+
+        .agency-card:hover .agency-flip-inner {
+            transform: none;
+        }
+
+        .agency-card.is-flipped .agency-flip-inner {
+            transform: rotateY(180deg);
+        }
+
+        .agency-card:hover .agency-front {
+            pointer-events: auto;
+        }
+
+        .agency-card.is-flipped .agency-front,
+        .agency-card:not(.is-flipped) .agency-back {
+            pointer-events: none;
+        }
+
+        .agency-card.is-flipped .agency-back {
+            pointer-events: auto;
+        }
+
+        .agency-flip-btn {
+            display: inline-flex;
+        }
+    }
+</style>
+
+<section class="py-5" style="background: linear-gradient(180deg, #f8fbff 0%, #eef5fb 100%);">
+    <div class="container">
+        <div id="agencies-grid" class="agencies-grid">
+            <article class="agency-card agencia-card" data-category="naturaleza">
+                <div class="agency-flip-inner">
+                    <div class="agency-face agency-front">
+                        <img src="../assets/img/agencias/andina-travel.svg" alt="Logo de Andina Travel" class="agency-logo">
+                        <h2 class="h4 fw-bold mb-2" style="color: #0a1a2f;">Andina Travel</h2>
+                        <p class="text-secondary small mb-3">Especialistas en rutas de montana y escapadas de naturaleza.</p>
+                        <div class="agency-rating" aria-label="5 estrellas">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <button type="button" class="agency-flip-btn agency-flip-next" aria-label="Ver detalles de Andina Travel">
+                            <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="agency-face agency-back">
+                        <h3 class="h5 fw-bold mb-3">Detalles</h3>
+                        <p class="small mb-2">Paquetes a Patagonia, Norte argentino y circuitos de aventura con coordinacion personalizada.</p>
+                        <p class="small mb-1">Experiencia: 12 anos</p>
+                        <p class="small mb-3">Cobertura: Nacional</p>
+                        <div class="rating-interactive mb-2" data-agencia="andina" aria-label="Valorar Andina Travel">
+                            <i class="bi bi-star" data-value="1"></i>
+                            <i class="bi bi-star" data-value="2"></i>
+                            <i class="bi bi-star" data-value="3"></i>
+                            <i class="bi bi-star" data-value="4"></i>
+                            <i class="bi bi-star" data-value="5"></i>
+                        </div>
+                        <p id="andina-success" class="agency-success small mb-0">Gracias por tu valoracion.</p>
+                        <button type="button" class="agency-flip-btn agency-flip-prev" aria-label="Volver a Andina Travel">
+                            <i class="bi bi-arrow-left"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="agency-card agencia-card" data-category="cultural">
+                <div class="agency-flip-inner">
+                    <div class="agency-face agency-front">
+                        <img src="../assets/img/agencias/horizonte-cultural.svg" alt="Logo de Horizonte Cultural" class="agency-logo">
+                        <h2 class="h4 fw-bold mb-2" style="color: #0a1a2f;">Horizonte Cultural</h2>
+                        <p class="text-secondary small mb-3">Recorridos urbanos, museos, arquitectura e historia local.</p>
+                        <div class="agency-rating" aria-label="4 estrellas">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star"></i>
+                        </div>
+                        <button type="button" class="agency-flip-btn agency-flip-next" aria-label="Ver detalles de Horizonte Cultural">
+                            <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="agency-face agency-back">
+                        <h3 class="h5 fw-bold mb-3">Detalles</h3>
+                        <p class="small mb-2">Programas en Buenos Aires, Cordoba y ciudades con foco en patrimonio y vida cultural.</p>
+                        <p class="small mb-1">Experiencia: 9 anos</p>
+                        <p class="small mb-3">Cobertura: Urbana y regional</p>
+                        <div class="rating-interactive mb-2" data-agencia="horizonte" aria-label="Valorar Horizonte Cultural">
+                            <i class="bi bi-star" data-value="1"></i>
+                            <i class="bi bi-star" data-value="2"></i>
+                            <i class="bi bi-star" data-value="3"></i>
+                            <i class="bi bi-star" data-value="4"></i>
+                            <i class="bi bi-star" data-value="5"></i>
+                        </div>
+                        <p id="horizonte-success" class="agency-success small mb-0">Gracias por tu valoracion.</p>
+                        <button type="button" class="agency-flip-btn agency-flip-prev" aria-label="Volver a Horizonte Cultural">
+                            <i class="bi bi-arrow-left"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="agency-card agencia-card" data-category="playa">
+                <div class="agency-flip-inner">
+                    <div class="agency-face agency-front">
+                        <img src="../assets/img/agencias/mar-abierto.svg" alt="Logo de Mar Abierto" class="agency-logo">
+                        <h2 class="h4 fw-bold mb-2" style="color: #0a1a2f;">Mar Abierto</h2>
+                        <p class="text-secondary small mb-3">Propuestas de sol y playa con servicios para familias y grupos.</p>
+                        <div class="agency-rating" aria-label="5 estrellas">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <button type="button" class="agency-flip-btn agency-flip-next" aria-label="Ver detalles de Mar Abierto">
+                            <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="agency-face agency-back">
+                        <h3 class="h5 fw-bold mb-3">Detalles</h3>
+                        <p class="small mb-2">Escapadas a costa Atlantica y destinos de relax con hoteleria y traslados incluidos.</p>
+                        <p class="small mb-1">Experiencia: 15 anos</p>
+                        <p class="small mb-3">Cobertura: Temporada verano</p>
+                        <div class="rating-interactive mb-2" data-agencia="mar" aria-label="Valorar Mar Abierto">
+                            <i class="bi bi-star" data-value="1"></i>
+                            <i class="bi bi-star" data-value="2"></i>
+                            <i class="bi bi-star" data-value="3"></i>
+                            <i class="bi bi-star" data-value="4"></i>
+                            <i class="bi bi-star" data-value="5"></i>
+                        </div>
+                        <p id="mar-success" class="agency-success small mb-0">Gracias por tu valoracion.</p>
+                        <button type="button" class="agency-flip-btn agency-flip-prev" aria-label="Volver a Mar Abierto">
+                            <i class="bi bi-arrow-left"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="agency-card agencia-card" data-category="gastronomia">
+                <div class="agency-flip-inner">
+                    <div class="agency-face agency-front">
+                        <img src="../assets/img/agencias/sabores-rutas.svg" alt="Logo de Sabores y Rutas" class="agency-logo">
+                        <h2 class="h4 fw-bold mb-2" style="color: #0a1a2f;">Sabores y Rutas</h2>
+                        <p class="text-secondary small mb-3">Experiencias gastronomicas, bodegas y viajes con identidad regional.</p>
+                        <div class="agency-rating" aria-label="4 estrellas">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star"></i>
+                        </div>
+                        <button type="button" class="agency-flip-btn agency-flip-next" aria-label="Ver detalles de Sabores y Rutas">
+                            <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="agency-face agency-back">
+                        <h3 class="h5 fw-bold mb-3">Detalles</h3>
+                        <p class="small mb-2">Itinerarios en Mendoza y el NOA con degustaciones, cocina local y salidas guiadas.</p>
+                        <p class="small mb-1">Experiencia: 7 anos</p>
+                        <p class="small mb-3">Cobertura: Gastronomica</p>
+                        <div class="rating-interactive mb-2" data-agencia="sabores" aria-label="Valorar Sabores y Rutas">
+                            <i class="bi bi-star" data-value="1"></i>
+                            <i class="bi bi-star" data-value="2"></i>
+                            <i class="bi bi-star" data-value="3"></i>
+                            <i class="bi bi-star" data-value="4"></i>
+                            <i class="bi bi-star" data-value="5"></i>
+                        </div>
+                        <p id="sabores-success" class="agency-success small mb-0">Gracias por tu valoracion.</p>
+                        <button type="button" class="agency-flip-btn agency-flip-prev" aria-label="Volver a Sabores y Rutas">
+                            <i class="bi bi-arrow-left"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>

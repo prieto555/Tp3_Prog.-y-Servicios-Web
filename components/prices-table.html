@@ -1,0 +1,223 @@
+<section class="py-5" style="background-color: #eef5fb;">
+    <style>
+        .prices-table-responsive tbody tr {
+            transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+        }
+
+        .price-tooltip-wrap {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            margin-left: 8px;
+        }
+
+        .price-tooltip-trigger {
+            width: 22px;
+            height: 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            border-radius: 50%;
+            background-color: #d8eef8;
+            color: #0a1a2f;
+            font-size: 0.78rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+
+        .price-tooltip-trigger:hover,
+        .price-tooltip-trigger:focus-visible {
+            transform: translateY(-1px);
+            outline: none;
+        }
+
+        .price-tooltip-box {
+            display: none;
+            position: absolute;
+            left: 50%;
+            bottom: calc(100% + 10px);
+            z-index: 10;
+            width: min(260px, 72vw);
+            padding: 10px 12px;
+            border-radius: 10px;
+            background-color: #0a1a2f;
+            color: #ffffff;
+            font-size: 0.82rem;
+            line-height: 1.45;
+            transform: translateX(-50%);
+            box-shadow: 0 14px 28px rgba(10, 26, 47, 0.2);
+        }
+
+        .price-tooltip-box::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 100%;
+            transform: translateX(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: #0a1a2f transparent transparent transparent;
+        }
+
+        @media (max-width: 767.98px) {
+            .prices-table-responsive table,
+            .prices-table-responsive thead,
+            .prices-table-responsive tbody,
+            .prices-table-responsive th,
+            .prices-table-responsive td,
+            .prices-table-responsive tr {
+                display: block;
+            }
+
+            .prices-table-responsive thead {
+                display: none;
+            }
+
+            .prices-table-responsive tbody tr {
+                padding: 1rem;
+                border-bottom: 1px solid #d4e3ef;
+                background-color: #ffffff;
+            }
+
+            .prices-table-responsive tbody tr:last-child {
+                border-bottom: 0;
+            }
+
+            .prices-table-responsive tbody td {
+                border: 0;
+                padding: 0.35rem 0;
+            }
+
+            .prices-table-responsive tbody td::before {
+                content: attr(data-label);
+                display: block;
+                margin-bottom: 0.15rem;
+                color: #6c757d;
+                font-size: 0.78rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.04em;
+            }
+
+            .price-tooltip-box {
+                left: auto;
+                right: 0;
+                transform: none;
+            }
+
+            .price-tooltip-box::after {
+                left: auto;
+                right: 10px;
+                transform: none;
+            }
+        }
+    </style>
+
+    <div class="container">
+        <div class="row justify-content-center justify-content-lg-start mb-4">
+            <div class="col-12 col-lg-8">
+                <h2 class="display-6 fw-bold mb-3" style="color: #0a1a2f;">Comparador de destinos</h2>
+                <p class="mb-0 text-secondary">
+                    Pasa el cursor sobre cada fila para resaltarla y usa los iconos de informacion para ver detalles del servicio incluido.
+                </p>
+            </div>
+        </div>
+
+        <div class="table-responsive prices-table-responsive rounded-4 border overflow-hidden" style="border-color: #d4e3ef !important; box-shadow: 0 12px 28px rgba(10, 26, 47, 0.08);">
+            <table class="table align-middle mb-0">
+                <thead style="background-color: #eef5fb;">
+                    <tr>
+                        <th class="fw-semibold border-0 px-4 py-3" style="color: #6c757d;">Destino</th>
+                        <th class="fw-semibold border-0 px-4 py-3" style="color: #6c757d;">Categoria</th>
+                        <th class="fw-semibold border-0 px-4 py-3" style="color: #6c757d;">Duracion</th>
+                        <th class="fw-semibold border-0 px-4 py-3" style="color: #6c757d;">Incluye</th>
+                        <th class="fw-semibold border-0 px-4 py-3" style="color: #6c757d;">Precio desde</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="price-row" tabindex="0" data-destination="Buenos Aires" data-price="$180.000" data-detail="City pass con transporte turistico y entrada a museos seleccionados.">
+                        <td class="px-4 py-3" data-label="Destino">Buenos Aires</td>
+                        <td class="px-4 py-3" data-label="Categoria">Cultural</td>
+                        <td class="px-4 py-3" data-label="Duracion">3 dias</td>
+                        <td class="px-4 py-3" data-label="Incluye">
+                            City pass
+                            <span class="price-tooltip-wrap">
+                                <button type="button" class="price-tooltip-trigger" aria-label="Ver detalle de city pass" aria-describedby="tooltip-city-pass">
+                                    <i class="bi bi-info"></i>
+                                </button>
+                                <span id="tooltip-city-pass" class="price-tooltip-box" role="tooltip">Incluye acceso ilimitado a transporte turistico y entrada a 3 museos.</span>
+                            </span>
+                        </td>
+                        <td class="px-4 py-3 fw-semibold" data-label="Precio desde" style="color: #00a2d6;">$180.000</td>
+                    </tr>
+
+                    <tr class="price-row" tabindex="0" data-destination="Patagonia" data-price="$420.000" data-detail="Excursiones guiadas, traslados y acceso a senderos principales.">
+                        <td class="px-4 py-3" data-label="Destino">Patagonia</td>
+                        <td class="px-4 py-3" data-label="Categoria">Naturaleza</td>
+                        <td class="px-4 py-3" data-label="Duracion">5 dias</td>
+                        <td class="px-4 py-3" data-label="Incluye">
+                            Excursiones
+                            <span class="price-tooltip-wrap">
+                                <button type="button" class="price-tooltip-trigger" aria-label="Ver detalle de excursiones" aria-describedby="tooltip-excursiones">
+                                    <i class="bi bi-info"></i>
+                                </button>
+                                <span id="tooltip-excursiones" class="price-tooltip-box" role="tooltip">Incluye 2 excursiones guiadas, traslados y acceso a senderos principales.</span>
+                            </span>
+                        </td>
+                        <td class="px-4 py-3 fw-semibold" data-label="Precio desde" style="color: #00a2d6;">$420.000</td>
+                    </tr>
+
+                    <tr class="price-row" tabindex="0" data-destination="Costa Atlantica" data-price="$230.000" data-detail="Hospedaje, desayuno y acceso a balneario con sombrilla.">
+                        <td class="px-4 py-3" data-label="Destino">Costa Atlantica</td>
+                        <td class="px-4 py-3" data-label="Categoria">Sol y playa</td>
+                        <td class="px-4 py-3" data-label="Duracion">4 dias</td>
+                        <td class="px-4 py-3" data-label="Incluye">
+                            Hotel + playa
+                            <span class="price-tooltip-wrap">
+                                <button type="button" class="price-tooltip-trigger" aria-label="Ver detalle de hotel y playa" aria-describedby="tooltip-playa">
+                                    <i class="bi bi-info"></i>
+                                </button>
+                                <span id="tooltip-playa" class="price-tooltip-box" role="tooltip">Incluye hospedaje, desayuno y acceso a balneario con sombrilla.</span>
+                            </span>
+                        </td>
+                        <td class="px-4 py-3 fw-semibold" data-label="Precio desde" style="color: #00a2d6;">$230.000</td>
+                    </tr>
+
+                    <tr class="price-row" tabindex="0" data-destination="Mendoza" data-price="$310.000" data-detail="Bodega tour con degustacion, visita guiada y traslado compartido.">
+                        <td class="px-4 py-3" data-label="Destino">Mendoza</td>
+                        <td class="px-4 py-3" data-label="Categoria">Gastronomico</td>
+                        <td class="px-4 py-3" data-label="Duracion">4 dias</td>
+                        <td class="px-4 py-3" data-label="Incluye">
+                            Bodega tour
+                            <span class="price-tooltip-wrap">
+                                <button type="button" class="price-tooltip-trigger" aria-label="Ver detalle de bodega tour" aria-describedby="tooltip-bodega">
+                                    <i class="bi bi-info"></i>
+                                </button>
+                                <span id="tooltip-bodega" class="price-tooltip-box" role="tooltip">Incluye degustacion, visita a bodega y traslado compartido.</span>
+                            </span>
+                        </td>
+                        <td class="px-4 py-3 fw-semibold" data-label="Precio desde" style="color: #00a2d6;">$310.000</td>
+                    </tr>
+
+                    <tr class="price-row" tabindex="0" data-destination="Lujan" data-price="$95.000" data-detail="Visita guiada a la basilica y circuito historico del centro.">
+                        <td class="px-4 py-3" data-label="Destino">Lujan</td>
+                        <td class="px-4 py-3" data-label="Categoria">Religioso</td>
+                        <td class="px-4 py-3" data-label="Duracion">2 dias</td>
+                        <td class="px-4 py-3" data-label="Incluye">
+                            Recorrido guiado
+                            <span class="price-tooltip-wrap">
+                                <button type="button" class="price-tooltip-trigger" aria-label="Ver detalle de recorrido guiado" aria-describedby="tooltip-lujan">
+                                    <i class="bi bi-info"></i>
+                                </button>
+                                <span id="tooltip-lujan" class="price-tooltip-box" role="tooltip">Incluye visita guiada a basilica y circuito historico del centro.</span>
+                            </span>
+                        </td>
+                        <td class="px-4 py-3 fw-semibold" data-label="Precio desde" style="color: #00a2d6;">$95.000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+  <title id="title">Logo Sabores y Rutas</title>
+  <desc id="desc">Logo con copa y camino para Sabores y Rutas.</desc>
+  <rect width="320" height="320" rx="40" fill="#fbf4eb"/>
+  <path d="M116 84h88c0 46-18 68-44 82-26-14-44-36-44-82z" fill="#8e4b2f"/>
+  <rect x="152" y="166" width="16" height="42" rx="8" fill="#8e4b2f"/>
+  <rect x="132" y="206" width="56" height="10" rx="5" fill="#8e4b2f"/>
+  <path d="M78 226c20-18 38-27 54-27 22 0 36 12 54 12 16 0 28-7 56-27" fill="none" stroke="#00c3ff" stroke-width="10" stroke-linecap="round"/>
+  <text x="160" y="258" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#0a1a2f">SABORES</text>
+  <text x="160" y="286" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#8e4b2f">Y RUTAS</text>
+</svg>

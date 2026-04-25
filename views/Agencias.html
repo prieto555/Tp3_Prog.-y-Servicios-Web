@@ -3,16 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agencias</title>
+    <title>Brujula Sur | Agencias</title>
     <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
-<body>
-    <main class="container py-5">
-        <h1 class="display-6 fw-bold">Agencias</h1>
-        <p class="text-body-secondary">Esta vista ya tiene Bootstrap y jQuery disponibles.</p>
+<body class="d-flex flex-column min-vh-100" style="background-color: #f4f8fb;">
+    <div id="navbar"></div>
+
+    <main class="flex-grow-1">
+        <div id="agencies-hero"></div>
+        <div id="agencies-filters"></div>
+        <div id="agencies-cards"></div>
     </main>
+
+    <div id="footer"></div>
 
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(function() {
+            $("#navbar").load("../components/navbar.html", function() {
+                const links = $("#navbar .nav-link");
+                
+                links.removeClass("bg-white bg-opacity-10");
+                links.css("color", "#ffffff");
+                
+                const agenciasLink = links.filter(function() {
+                    return $(this).attr("href") === "../views/Agencias.html";
+                });
+                
+                agenciasLink.addClass("bg-white bg-opacity-10");
+                agenciasLink.css("color", "#8fe7ff");
+            });
+
+            let activeAgencyFilter = "todos";
+
+            const applyAgencyFilter = function() {
+                const $cards = $("#agencies-grid .agency-card");
+
+                if (!$cards.length) {
+                    return;
+                }
+
+                $cards.removeClass("is-flipped").hide();
+
+                const $filteredCards = $cards.filter(function() {
+                    const category = String($(this).data("category"));
+
+                    return activeAgencyFilter === "todos" || category === activeAgencyFilter;
+                });
+
+                $filteredCards.show();
+            };
+
+            $("#agencies-hero").load("../components/agencies-hero.html");
+            $("#agencies-filters").load("../components/agencies-filters.html", function() {
+                $(".filter-btn").on("click", function() {
+                    activeAgencyFilter = $(this).data("filter");
+                    
+                    $(".filter-btn").removeClass("active").css({
+                        "background-color": "#ffffff",
+                        "color": "#0a1a2f",
+                        "border": "1px solid #d4e3ef"
+                    });
+                    
+                    $(this).addClass("active").css({
+                        "background-color": "#12324a",
+                        "color": "#ffffff",
+                        "border": "1px solid #12324a"
+                    });
+
+                    applyAgencyFilter();
+                });
+            });
+
+            $("#agencies-cards").load("../components/agencies-cards.html", function() {
+                applyAgencyFilter();
+
+                $(".agency-flip-next").on("click", function(event) {
+                    event.stopPropagation();
+                    $(this).closest(".agency-card").addClass("is-flipped");
+                });
+
+                $(".agency-flip-prev").on("click", function(event) {
+                    event.stopPropagation();
+                    $(this).closest(".agency-card").removeClass("is-flipped");
+                });
+
+                $(".rating-interactive").on("click", function(event) {
+                    event.stopPropagation();
+                });
+
+                $(".rating-interactive").each(function() {
+                    const $container = $(this);
+                    const agencia = $container.data("agencia");
+                    const $stars = $container.find("i");
+                    const $card = $container.closest(".agency-card");
+                    const $frontRating = $card.find(".agency-rating");
+                    const $frontStars = $frontRating.find("i");
+                    let selectedValue = 0;
+
+                    const paintStars = function(value, className) {
+                        $stars.removeClass("bi-star-fill active preview").addClass("bi-star");
+
+                        $stars.each(function() {
+                            if ($(this).data("value") <= value) {
+                                $(this).removeClass("bi-star").addClass(`bi-star-fill ${className}`);
+                            }
+                        });
+                    };
+
+                    const paintFrontRating = function(value) {
+                        $frontStars.removeClass("bi-star-fill bi-star").addClass("bi-star");
+
+                        $frontStars.each(function(index) {
+                            if (index < value) {
+                                $(this).removeClass("bi-star").addClass("bi-star-fill");
+                            }
+                        });
+
+                        $frontRating
+                            .addClass("user-rated")
+                            .attr("aria-label", `${value} estrellas seleccionadas por el usuario`);
+                    };
+                    
+                    $stars.on("mouseenter", function() {
+                        const value = $(this).data("value");
+                        paintStars(value, "preview");
+                    });
+
+                    $container.on("mouseleave", function() {
+                        paintStars(selectedValue, "active");
+                    });
+
+                    $stars.on("click", function() {
+                        selectedValue = $(this).data("value");
+                        const $successMsg = $(`#${agencia}-success`);
+                        
+                        paintStars(selectedValue, "active");
+                        paintFrontRating(selectedValue);
+                        
+                        $successMsg.stop(true, true).fadeIn(250).delay(1600).fadeOut(300);
+                    });
+                });
+            });
+
+            $("#footer").load("../components/footer.html");
+        });
+    </script>
 </body>
 </html>
