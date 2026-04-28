@@ -1,0 +1,98 @@
+<section class="pb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card border-0 rounded-5 p-4 p-lg-5 scroll-reveal" style="box-shadow: 0 18px 36px rgba(10, 26, 47, 0.10);">
+                    <div class="row g-4 mb-4">
+                        <div class="col-12">
+                            <h2 class="display-6 fw-bold mb-3 d-flex align-items-center gap-3" style="color: #0a1a2f;"><span class="sprite-icon sprite-mail sprite-lg"></span><span>Formulario de contacto</span></h2>
+                            <p class="text-secondary mb-0">Completa tus datos y te responderemos con una simulacion visual, manteniendo la estructura y los campos del tp2.</p>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="rounded-4 p-4" style="background-color: #f7fbff; border: 1px solid #d4e3ef;">
+                                <h3 class="fs-5 fw-bold mb-2 d-flex align-items-center gap-2" style="color: #0a1a2f;"><i class="bi bi-clipboard2-pulse-fill" style="color: #00a2d6;"></i><span>Estado del formulario</span></h3>
+                                <p class="small text-secondary mb-2">Campos obligatorios: nombre, email, asunto, mensaje y terminos.</p>
+                                <p class="small mb-0" id="contact-form-status" style="color: #00a2d6;">Esperando datos para enviar.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form id="contact-form" class="row g-4" novalidate>
+                        <div class="col-12 col-md-6">
+                            <label for="contact-name" class="form-label fw-semibold">Nombre Completo *</label>
+                            <input type="text" class="form-control form-control-lg" id="contact-name" placeholder="Tu nombre completo" required minlength="3" maxlength="60" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+">
+                            <div class="small mt-2 d-none validation-message text-danger" data-for="contact-name">Completa este campo con al menos 3 letras.</div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <label for="contact-email" class="form-label fw-semibold">Email *</label>
+                            <input type="email" class="form-control form-control-lg" id="contact-email" placeholder="tu@email.com" required maxlength="120">
+                            <div class="small mt-2 d-none validation-message text-danger" data-for="contact-email">Ingresa un email valido.</div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <label for="contact-phone" class="form-label fw-semibold">Telefono</label>
+                            <input type="tel" class="form-control form-control-lg" id="contact-phone" placeholder="+54 (xxx) xxxxx" maxlength="25" pattern="[0-9+\-()\s]*">
+                            <div class="small mt-2 d-none validation-message text-danger" data-for="contact-phone">Usa solo numeros, espacios o simbolos de telefono.</div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <label for="contact-subject" class="form-label fw-semibold">Asunto *</label>
+                            <select id="contact-subject" class="form-select form-select-lg" required>
+                                <option value="">Selecciona un asunto</option>
+                                <option value="consulta">Consulta General</option>
+                                <option value="reserva">Reserva de Viaje</option>
+                                <option value="reclamo">Reclamo</option>
+                                <option value="sugerencia">Sugerencia</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                            <div class="small mt-2 d-none validation-message text-danger" data-for="contact-subject">Selecciona un asunto.</div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="contact-message" class="form-label fw-semibold">Mensaje *</label>
+                            <textarea id="contact-message" class="form-control" rows="6" minlength="10" maxlength="500" required placeholder="Escribe tu mensaje aqui..."></textarea>
+                            <div class="d-flex justify-content-between align-items-center mt-2 gap-2">
+                                <div class="small text-secondary">Maximo 500 caracteres</div>
+                                <div class="small text-secondary"><span id="contact-char-count">0</span>/500</div>
+                            </div>
+                            <div class="small mt-2 d-none validation-message text-danger" data-for="contact-message">Escribe un mensaje de al menos 10 caracteres.</div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="contact-terms" required>
+                                <label class="form-check-label" for="contact-terms">
+                                    Acepto los terminos y condiciones *
+                                </label>
+                            </div>
+                            <div class="small mt-2 d-none validation-message text-danger" data-for="contact-terms">Debes aceptar los terminos.</div>
+                        </div>
+
+                        <div class="col-12 d-flex flex-column flex-md-row gap-3">
+                            <button type="submit" id="contact-submit-btn" class="btn btn-lg fw-semibold px-4 d-inline-flex align-items-center justify-content-center gap-2" style="background-color: #00c3ff; color: #0a1a2f; min-width: 230px; min-height: 56px;">
+                                <span class="btn-submit-text">Enviar Mensaje</span>
+                                <span class="spinner-border spinner-border-sm" id="contact-submit-spinner" role="status" aria-hidden="true" style="display: none; width: 1.2rem; height: 1.2rem; border-width: 0.18em; color: #0a1a2f;"></span>
+                            </button>
+                            <button type="button" id="contact-reset-btn" class="btn btn-lg fw-semibold px-4" style="background-color: #f4f4f4; color: #0a1a2f;">Limpiar</button>
+                            <div id="contact-feedback" class="align-self-center small fw-semibold" style="color: #00a2d6;"></div>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-end">
+                            <button
+                                type="button"
+                                class="btn btn-outline-dark rounded-pill px-4 d-inline-flex align-items-center gap-2"
+                                data-bs-toggle="modal"
+                                data-bs-target="#phishingEducationModal"
+                            >
+                                <span class="sprite-icon sprite-shield"></span><span>Simulacion de phishing</span>
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

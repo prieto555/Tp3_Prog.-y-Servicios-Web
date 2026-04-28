@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brujula Sur | Agencias</title>
     <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.min.css">
 </head>
 <body class="d-flex flex-column min-vh-100" style="background-color: #f4f8fb;">
     <div id="navbar"></div>
@@ -22,18 +22,76 @@
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         $(function() {
-            $("#navbar").load("../components/navbar.html", function() {
+            const initMobileNavbarPersistence = function() {
+                const collapseElement = document.getElementById("navbarBrujulaSur");
+
+                if (!collapseElement) {
+                    return;
+                }
+
+                const collapseInstance = bootstrap.Collapse.getOrCreateInstance(collapseElement, {
+                    toggle: false
+                });
+                const storageKey = "brujula-sur-navbar-open";
+
+                if (window.innerWidth < 992 && window.localStorage.getItem(storageKey) === "true") {
+                    collapseElement.classList.remove("collapsing");
+                    collapseElement.classList.add("show");
+                }
+
+                collapseElement.addEventListener("shown.bs.collapse", function() {
+                    window.localStorage.setItem(storageKey, "true");
+                });
+
+                collapseElement.addEventListener("hidden.bs.collapse", function() {
+                    window.localStorage.setItem(storageKey, "false");
+                });
+            };
+
+            const initNavbarActiveState = function() {
                 const links = $("#navbar .nav-link");
-                
+                const brandLink = $("#navbar .navbar-brand");
+                const currentPage = window.location.pathname.split("/").pop();
+                const storageKey = "brujula-sur-navbar-open";
+
                 links.removeClass("bg-white bg-opacity-10");
                 links.css("color", "#ffffff");
-                
-                const agenciasLink = links.filter(function() {
-                    return $(this).attr("href") === "../views/Agencias.html";
+
+                const activeLink = links.filter(function() {
+                    return $(this).attr("href").split("/").pop() === currentPage;
+                }).first();
+
+                activeLink.addClass("bg-white bg-opacity-10");
+                activeLink.css("color", "#8fe7ff");
+
+                links.on("click", function(event) {
+                    const targetPage = $(this).attr("href").split("/").pop();
+
+                    if (window.innerWidth < 992 && $("#navbarBrujulaSur").hasClass("show")) {
+                        window.localStorage.setItem(storageKey, "true");
+                    }
+
+                    if (targetPage === currentPage) {
+                        event.preventDefault();
+                    }
                 });
-                
-                agenciasLink.addClass("bg-white bg-opacity-10");
-                agenciasLink.css("color", "#8fe7ff");
+
+                brandLink.on("click", function(event) {
+                    const targetPage = $(this).attr("href").split("/").pop();
+
+                    if (window.innerWidth < 992 && $("#navbarBrujulaSur").hasClass("show")) {
+                        window.localStorage.setItem(storageKey, "true");
+                    }
+
+                    if (targetPage === currentPage) {
+                        event.preventDefault();
+                    }
+                });
+            };
+
+            $("#navbar").load("../components/navbar.html", function() {
+                initMobileNavbarPersistence();
+                initNavbarActiveState();
             });
 
             let activeAgencyFilter = "todos";

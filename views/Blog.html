@@ -1,18 +1,464 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
+    <title>Brujula Sur | Blog</title>
     <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.min.css">
+    <style>
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .scroll-reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
-<body>
-    <main class="container py-5">
-        <h1 class="display-6 fw-bold">Blog</h1>
-        <p class="text-body-secondary">Esta vista ya tiene Bootstrap y jQuery disponibles.</p>
+
+<body class="d-flex flex-column min-vh-100" style="background-color: #f4f8fb;">
+    <div id="navbar"></div>
+
+    <main class="flex-grow-1">
+        <div id="blog-hero"></div>
+        <div id="blog-content"></div>
+        <div id="blog-comments"></div>
     </main>
+
+    <div id="footer"></div>
 
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(function () {
+            const initMobileNavbarPersistence = function () {
+                const collapseElement = document.getElementById("navbarBrujulaSur");
+
+                if (!collapseElement) {
+                    return;
+                }
+
+                const collapseInstance = bootstrap.Collapse.getOrCreateInstance(collapseElement, {
+                    toggle: false
+                });
+                const storageKey = "brujula-sur-navbar-open";
+
+                if (window.innerWidth < 992 && window.localStorage.getItem(storageKey) === "true") {
+                    collapseElement.classList.remove("collapsing");
+                    collapseElement.classList.add("show");
+                }
+
+                collapseElement.addEventListener("shown.bs.collapse", function () {
+                    window.localStorage.setItem(storageKey, "true");
+                });
+
+                collapseElement.addEventListener("hidden.bs.collapse", function () {
+                    window.localStorage.setItem(storageKey, "false");
+                });
+            };
+
+            $("#navbar").load("../components/navbar.html", function () {
+                initMobileNavbarPersistence();
+                const links = $("#navbar .nav-link");
+                const brandLink = $("#navbar .navbar-brand");
+                const currentPage = window.location.pathname.split("/").pop();
+                const storageKey = "brujula-sur-navbar-open";
+
+                links.removeClass("bg-white bg-opacity-10");
+                links.css("color", "#ffffff");
+
+                const activeLink = links.filter(function () {
+                    return $(this).attr("href").split("/").pop() === currentPage;
+                }).first();
+
+                activeLink.addClass("bg-white bg-opacity-10");
+                activeLink.css("color", "#8fe7ff");
+
+                links.on("click", function (event) {
+                    const targetPage = $(this).attr("href").split("/").pop();
+
+                    if (window.innerWidth < 992 && $("#navbarBrujulaSur").hasClass("show")) {
+                        window.localStorage.setItem(storageKey, "true");
+                    }
+
+                    if (targetPage === currentPage) {
+                        event.preventDefault();
+                    }
+                });
+
+                brandLink.on("click", function (event) {
+                    const targetPage = $(this).attr("href").split("/").pop();
+
+                    if (window.innerWidth < 992 && $("#navbarBrujulaSur").hasClass("show")) {
+                        window.localStorage.setItem(storageKey, "true");
+                    }
+
+                    if (targetPage === currentPage) {
+                        event.preventDefault();
+                    }
+                });
+            });
+
+            $("#blog-hero").load("../components/blog-hero.html");
+
+            $("#blog-content").load("../components/blog-content.html", function () {
+                $(".blog-hover-card").on("mouseenter", function () {
+                    $(this).css({
+                        "transform": "translateY(-8px)",
+                        "box-shadow": "0 24px 44px rgba(10, 26, 47, 0.16)"
+                    });
+                });
+
+                $(".blog-hover-card").on("mouseleave", function () {
+                    $(this).css({
+                        "transform": "",
+                        "box-shadow": "0 18px 36px rgba(10, 26, 47, 0.10)"
+                    });
+                });
+
+                $(".blog-filter-chip").on("click", function () {
+                    const chip = $(this);
+                    const category = chip.data("category");
+                    let visiblePosts = 0;
+
+                    $(".blog-filter-chip").removeClass("active").css({
+                        "background-color": "#ffffff",
+                        "color": "#0a1a2f",
+                        "border": "1px solid #d4e3ef"
+                    });
+
+                    chip.addClass("active").css({
+                        "background-color": "#0a1a2f",
+                        "color": "#ffffff",
+                        "border": "1px solid #0a1a2f"
+                    });
+
+                    $(".blog-post").each(function () {
+                        const post = $(this);
+                        const categories = String(post.data("category")).split(" ");
+                        const matches = category === "all" || categories.includes(String(category));
+
+                        post.toggle(matches);
+
+                        if (matches) {
+                            visiblePosts += 1;
+                        }
+                    });
+
+                    $("#blog-empty-state").toggleClass("d-none", visiblePosts !== 0);
+                });
+
+                $(".article-comments-toggle").on("click", function () {
+                    const button = $(this);
+                    const target = $(button.data("target"));
+                    const willOpen = target.hasClass("d-none") || !target.is(":visible");
+
+                    target.stop(true, true).slideToggle(180);
+                    button.text(willOpen ? "Ocultar comentarios" : "Ver comentarios");
+                });
+
+                $(".article-like-toggle").on("click", function () {
+                    const button = $(this);
+                    const icon = button.find("i");
+                    const label = button.find(".like-label");
+                    const active = button.data("active") === true;
+
+                    button.data("active", !active);
+
+                    if (active) {
+                        button.css({
+                            "background-color": "#ffffff",
+                            "color": "#0a1a2f",
+                            "border": "1px solid #d4e3ef"
+                        });
+                        icon.attr("class", "bi bi-heart me-1");
+                        label.text("Me interesa");
+                    } else {
+                        button.css({
+                            "background-color": "#0a1a2f",
+                            "color": "#ffffff",
+                            "border": "1px solid #0a1a2f"
+                        });
+                        icon.attr("class", "bi bi-heart-fill me-1");
+                        label.text("Guardado");
+                    }
+                });
+
+                initializeScrollReveal();
+            });
+
+            $("#blog-comments").load("../components/blog-comments.html", function () {
+                const storageKey = "brujula-sur-blog-comments";
+                const suspiciousPattern = /<script|<\/script|javascript:|onerror=|onload=|<|>|["'`;{}]/gi;
+
+                const updateCommentCounter = function () {
+                    const total = $("#comments-list article").length;
+                    $("#comments-counter").text(total === 1 ? "1 comentario" : `${total} comentarios`);
+                };
+
+                const sanitizeName = function (value) {
+                    return String(value ?? "")
+                        .replace(suspiciousPattern, "")
+                        .replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ.\s]/g, "")
+                        .replace(/\s{2,}/g, " ")
+                        .trim();
+                };
+
+                const sanitizeMessage = function (value) {
+                    return String(value ?? "")
+                        .replace(/<script|<\/script|javascript:|onerror=|onload=/gi, "")
+                        .replace(/[<>`{}]/g, "")
+                        .replace(/\s{3,}/g, "  ")
+                        .trim();
+                };
+
+                const validateCommentForm = function () {
+                    const nameField = $("#comment-name");
+                    const messageField = $("#comment-message");
+                    const nameValue = sanitizeName(nameField.val());
+                    const messageValue = sanitizeMessage(messageField.val());
+                    const nameValid = nameValue.length >= 3;
+                    const messageValid = messageValue.length >= 10;
+
+                    if (String(nameField.val()) !== nameValue) {
+                        nameField.val(nameValue);
+                    }
+
+                    if (String(messageField.val()) !== messageValue) {
+                        messageField.val(messageValue);
+                    }
+
+                    nameField.toggleClass("is-invalid", !nameValid);
+                    nameField.toggleClass("is-valid", nameValid && nameValue !== "");
+                    messageField.toggleClass("is-invalid", !messageValid);
+                    messageField.toggleClass("is-valid", messageValid && messageValue !== "");
+                    $("#comment-name-error").toggleClass("d-none", nameValid);
+                    $("#comment-message-error").toggleClass("d-none", messageValid);
+
+                    return {
+                        valid: nameValid && messageValid,
+                        name: nameValue,
+                        message: messageValue
+                    };
+                };
+
+                const buildCommentCard = function (name, message, metaText, avatarStyle) {
+                    const initials = name
+                        .split(/\s+/)
+                        .filter(Boolean)
+                        .slice(0, 2)
+                        .map(function (part) {
+                            return part.charAt(0).toUpperCase();
+                        })
+                        .join("") || "NV";
+
+                    const newComment = $(
+                        '<article class="card border-0 rounded-5 p-4 scroll-reveal is-visible" style="box-shadow: 0 18px 36px rgba(10, 26, 47, 0.10);">' +
+                            '<div class="d-flex gap-3">' +
+                                '<span class="comment-avatar d-inline-flex align-items-center justify-content-center rounded-circle fw-bold flex-shrink-0" style="width: 52px; height: 52px; color: #0a1a2f;"></span>' +
+                                '<div>' +
+                                    '<div class="d-flex flex-wrap gap-2 align-items-center mb-2">' +
+                                        '<h3 class="h5 fw-bold mb-0"></h3>' +
+                                        '<span class="small text-secondary comment-meta"></span>' +
+                                    '</div>' +
+                                    '<p class="text-secondary mb-0"></p>' +
+                                '</div>' +
+                            '</div>' +
+                        '</article>'
+                    );
+
+                    newComment.find(".comment-avatar").attr("style", `width: 52px; height: 52px; color: #0a1a2f; ${avatarStyle}`);
+                    newComment.find(".comment-avatar").text(initials);
+                    newComment.find("h3").text(name);
+                    newComment.find(".comment-meta").text(metaText);
+                    newComment.find("p").text(message);
+
+                    return newComment;
+                };
+
+                const saveCustomComments = function () {
+                    const comments = [];
+
+                    $("#comments-list article[data-custom='true']").each(function () {
+                        const card = $(this);
+
+                        comments.push({
+                            name: card.find("h3").first().text(),
+                            message: card.find("p").first().text()
+                        });
+                    });
+
+                    window.localStorage.setItem(storageKey, JSON.stringify(comments));
+                };
+
+                const renderStoredComments = function () {
+                    const raw = window.localStorage.getItem(storageKey);
+
+                    if (!raw) {
+                        return;
+                    }
+
+                    let comments = [];
+
+                    try {
+                        comments = JSON.parse(raw) || [];
+                    } catch (error) {
+                        comments = [];
+                    }
+
+                    comments
+                        .slice()
+                        .reverse()
+                        .forEach(function (comment) {
+                            const card = buildCommentCard(
+                                comment.name,
+                                comment.message,
+                                "Comentario agregado",
+                                "background: linear-gradient(180deg, #dff8ef 0%, #aee8d0 100%);"
+                            );
+
+                            card.attr("data-custom", "true");
+                            $("#comments-list").prepend(card);
+                        });
+                };
+
+                const publishComment = function () {
+                    const formState = validateCommentForm();
+                    const name = formState.name;
+                    const message = formState.message;
+                    const feedback = $("#comment-feedback");
+
+                    if (!formState.valid) {
+                        feedback
+                            .css("color", "#dc3545")
+                            .text("Completa nombre y comentario para publicar.");
+                        return;
+                    }
+
+                    const newComment = buildCommentCard(
+                        name,
+                        message,
+                        "Hace un instante",
+                        "background: linear-gradient(180deg, #dff8ef 0%, #aee8d0 100%);"
+                    );
+
+                    newComment.attr("data-custom", "true");
+                    newComment.hide();
+                    $("#comments-list").prepend(newComment);
+                    newComment.slideDown(220);
+                    updateCommentCounter();
+                    saveCustomComments();
+                    feedback
+                        .css("color", "#00a2d6")
+                        .text("Comentario publicado correctamente.");
+                    $("#comment-form")[0].reset();
+                    $("#comment-char-count").text("0");
+                };
+
+                $("#comment-message").on("input", function () {
+                    const cleanValue = sanitizeMessage($(this).val());
+
+                    if ($(this).val() !== cleanValue) {
+                        $(this).val(cleanValue);
+                    }
+
+                    $("#comment-char-count").text($(this).val().length);
+                    validateCommentForm();
+                });
+
+                $("#comment-name").on("input", function () {
+                    const cleanValue = sanitizeName($(this).val());
+
+                    if ($(this).val() !== cleanValue) {
+                        $(this).val(cleanValue);
+                    }
+
+                    validateCommentForm();
+                });
+
+                $("#publish-comment-btn").on("click", function (event) {
+                    event.preventDefault();
+                    publishComment();
+                });
+
+                $("#blog-comments").on("submit", "#comment-form", function (event) {
+                    event.preventDefault();
+                    publishComment();
+                });
+
+                renderStoredComments();
+                updateCommentCounter();
+                initializeScrollReveal();
+            });
+
+            $("#footer").load("../components/footer.html", function () {
+                const newsletterInput = $("#footer input[type='email']").first();
+                const newsletterForm = newsletterInput.closest("form");
+
+                newsletterInput.on("input", function () {
+                    const cleanValue = String($(this).val() ?? "")
+                        .replace(/<script|<\/script|javascript:|onerror=|onload=/gi, "")
+                        .replace(/[<>"'`\s]/g, "")
+                        .toLowerCase();
+
+                    $(this).val(cleanValue);
+                });
+
+                newsletterForm.on("submit", function (event) {
+                    event.preventDefault();
+                    const email = String(newsletterInput.val() ?? "").trim();
+
+                    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                        newsletterInput.addClass("is-invalid");
+                        return;
+                    }
+
+                    newsletterInput.removeClass("is-invalid").addClass("is-valid");
+                    this.reset();
+                    newsletterInput.removeClass("is-valid");
+                });
+            });
+
+            function initializeScrollReveal() {
+                const elements = document.querySelectorAll(".scroll-reveal:not(.reveal-bound)");
+
+                if (!elements.length) {
+                    return;
+                }
+
+                if (!("IntersectionObserver" in window)) {
+                    elements.forEach((element) => {
+                        element.classList.add("is-visible");
+                        element.classList.add("reveal-bound");
+                    });
+                    return;
+                }
+
+                const observer = new IntersectionObserver((entries, currentObserver) => {
+                    entries.forEach((entry) => {
+                        if (!entry.isIntersecting) {
+                            return;
+                        }
+
+                        entry.target.classList.add("is-visible");
+                        currentObserver.unobserve(entry.target);
+                    });
+                }, {
+                    threshold: 0.18
+                });
+
+                elements.forEach((element) => {
+                    element.classList.add("reveal-bound");
+                    observer.observe(element);
+                });
+            }
+        });
+    </script>
 </body>
+
 </html>

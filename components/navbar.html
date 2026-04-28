@@ -1,3 +1,48 @@
+<style>
+    .sprite-icon {
+        --sprite-size: 20px;
+        display: inline-block;
+        width: var(--sprite-size);
+        height: var(--sprite-size);
+        background-image: url("../assets/img/ui/ui-sprite.svg");
+        background-repeat: no-repeat;
+        background-size: calc(var(--sprite-size) * 8) var(--sprite-size);
+        background-position: 0 0;
+        flex-shrink: 0;
+    }
+
+    .sprite-lg {
+        --sprite-size: 24px;
+    }
+
+    .sprite-instagram { background-position: calc(var(--sprite-size) * 0) 0; }
+    .sprite-facebook { background-position: calc(var(--sprite-size) * -1) 0; }
+    .sprite-youtube { background-position: calc(var(--sprite-size) * -2) 0; }
+    .sprite-x { background-position: calc(var(--sprite-size) * -3) 0; }
+    .sprite-shield { background-position: calc(var(--sprite-size) * -4) 0; }
+    .sprite-compass { background-position: calc(var(--sprite-size) * -5) 0; }
+    .sprite-mail { background-position: calc(var(--sprite-size) * -6) 0; }
+    .sprite-heart { background-position: calc(var(--sprite-size) * -7) 0; }
+
+    .navbar-toggle-icon-open,
+    .navbar-toggle-icon-close {
+        font-size: 1.6rem;
+        color: #ffffff;
+        line-height: 1;
+    }
+
+    .navbar-toggle-icon-close {
+        display: none;
+    }
+
+    .navbar-toggler[aria-expanded="true"] .navbar-toggle-icon-open {
+        display: none;
+    }
+
+    .navbar-toggler[aria-expanded="true"] .navbar-toggle-icon-close {
+        display: inline-block;
+    }
+</style>
 <nav
     class="navbar navbar-expand-lg sticky-top py-3"
     style="background-color: #12324a; box-shadow: 0 10px 24px rgba(10, 26, 47, 0.12);"
@@ -6,9 +51,9 @@
         <a class="navbar-brand d-flex align-items-center gap-3 text-white fw-bold text-uppercase m-0" href="../views/Principal.html">
             <span
                 class="d-inline-flex align-items-center justify-content-center rounded-4 fw-bold"
-                style="width: 56px; height: 56px; background: linear-gradient(180deg, #00c3ff 0%, #7adfff 100%); color: #0a1a2f; box-shadow: 0 12px 24px rgba(4, 18, 32, 0.22);"
+                style="width: 56px; height: 56px; background: linear-gradient(180deg, #08111f 0%, #15324b 100%); color: #7adfff; box-shadow: 0 12px 24px rgba(4, 18, 32, 0.22), inset 0 0 0 1px rgba(122, 223, 255, 0.18);"
             >
-                BS
+                <span class="sprite-icon sprite-compass sprite-lg"></span>
             </span>
             <span class="d-flex flex-column lh-sm">
                 <span class="text-white" style="font-size: 1rem; letter-spacing: 0.04em;">Brujula Sur</span>
@@ -25,17 +70,22 @@
             aria-expanded="false"
             aria-label="Abrir menu"
         >
-            <span class="navbar-toggler-icon" style="filter: invert(1) brightness(100);"></span>
+            <span class="navbar-toggle-icon-open">
+                <i class="bi bi-list"></i>
+            </span>
+            <span class="navbar-toggle-icon-close">
+                <i class="bi bi-x-lg"></i>
+            </span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarBrujulaSur">
-            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2 mt-3 mt-lg-0">
-                <li class="nav-item"><a class="nav-link px-3 py-2 rounded-3 bg-white bg-opacity-10" href="../views/Principal.html" style="color: #8fe7ff;">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link px-3 py-2 rounded-3 text-white" href="../views/Destinos.html">Destinos</a></li>
-                <li class="nav-item"><a class="nav-link px-3 py-2 rounded-3 text-white" href="../views/Agencias.html">Agencias</a></li>
-                <li class="nav-item"><a class="nav-link px-3 py-2 rounded-3 text-white" href="../views/Precios.html">Precios</a></li>
-                <li class="nav-item"><a class="nav-link px-3 py-2 rounded-3 text-white" href="../views/Blog.html">Blog</a></li>
-                <li class="nav-item"><a class="nav-link px-3 py-2 rounded-3 text-white" href="../views/Contactos.html">Contacto</a></li>
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-4  mt-3 mt-lg-0">
+                <li class="nav-item block-lg row"><a class="nav-link px-3 py-2 rounded-3 text-white d-inline-flex align-items-center gap-2" href="../views/Principal.html"><i class="bi bi-house-door-fill"></i><span>Inicio</span></a></li>
+                <li class="nav-item block-lg row"><a class="nav-link px-3 py-2 rounded-3 text-white d-inline-flex align-items-center gap-2" href="../views/Destinos.html"><i class="bi bi-signpost-split-fill"></i><span>Destinos</span></a></li>
+                <li class="nav-item block-lg row"><a class="nav-link px-3 py-2 rounded-3 text-white d-inline-flex align-items-center gap-2" href="../views/Agencias.html"><i class="bi bi-buildings-fill"></i><span>Agencias</span></a></li>
+                <li class="nav-item block-lg row"><a class="nav-link px-3 py-2 rounded-3 text-white d-inline-flex align-items-center gap-2" href="../views/Precios.html"><i class="bi bi-tags-fill"></i><span>Precios</span></a></li>
+                <li class="nav-item block-lg row"><a class="nav-link px-3 py-2 rounded-3 text-white d-inline-flex align-items-center gap-2" href="../views/Blog.html"><i class="bi bi-journal-richtext"></i><span>Blog</span></a></li>
+                <li class="nav-item block-lg row"><a class="nav-link px-3 py-2 rounded-3 text-white d-inline-flex align-items-center gap-2" href="../views/Contactos.html"><i class="bi bi-envelope-paper-fill"></i><span>Contacto</span></a></li>
             </ul>
         </div>
     </div>

@@ -1,6 +1,20 @@
 {
+  "name": "brujula-sur",
+  "version": "1.0.0",
+  "description": "TP3 - Programacion y Servicios Web",
+  "scripts": {
+    "start": "npx http-server . -p 3000 -c-1 -o",
+    "build": "node scripts/build.js",
+    "deploy:gh": "npm run build && npx gh-pages -d dist",
+    "predeploy:gh": "npm run build"
+  },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1",
     "jquery": "^4.0.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.2.0"
   }
 }

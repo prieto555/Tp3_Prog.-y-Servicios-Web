@@ -1,0 +1,235 @@
+<section class="pb-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-12 col-xl-8">
+                <div class="d-flex flex-wrap gap-2 mb-4" id="blog-filter-chips">
+                    <button
+                        type="button"
+                        class="btn rounded-pill px-4 py-2 blog-filter-chip active"
+                        data-category="all"
+                        style="background-color: #0a1a2f; color: #ffffff; border: 1px solid #0a1a2f;"
+                    >
+                        Todas
+                    </button>
+                    <button
+                        type="button"
+                        class="btn rounded-pill px-4 py-2 blog-filter-chip"
+                        data-category="cultural"
+                        style="background-color: #ffffff; color: #0a1a2f; border: 1px solid #d4e3ef;"
+                    >
+                        Cultural
+                    </button>
+                    <button
+                        type="button"
+                        class="btn rounded-pill px-4 py-2 blog-filter-chip"
+                        data-category="aventura"
+                        style="background-color: #ffffff; color: #0a1a2f; border: 1px solid #d4e3ef;"
+                    >
+                        Aventura
+                    </button>
+                    <button
+                        type="button"
+                        class="btn rounded-pill px-4 py-2 blog-filter-chip"
+                        data-category="gastronomia"
+                        style="background-color: #ffffff; color: #0a1a2f; border: 1px solid #d4e3ef;"
+                    >
+                        Gastronomia
+                    </button>
+                    <button
+                        type="button"
+                        class="btn rounded-pill px-4 py-2 blog-filter-chip"
+                        data-category="relax"
+                        style="background-color: #ffffff; color: #0a1a2f; border: 1px solid #d4e3ef;"
+                    >
+                        Relax
+                    </button>
+                </div>
+
+                <div class="row g-4" id="blog-articles">
+                    <div class="col-12 blog-post" data-category="cultural">
+                        <article class="card border-0 rounded-5 overflow-hidden h-100 scroll-reveal" style="box-shadow: 0 18px 36px rgba(10, 26, 47, 0.10);">
+                            <div class="row g-0 h-100">
+                                <div class="col-12 col-lg-6">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?auto=format&fit=crop&w=1200&q=80"
+                                        alt="Ciudad historica y arquitectura cultural"
+                                        class="w-100 h-100"
+                                        style="object-fit: cover; min-height: 320px;"
+                                    >
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <div class="card-body p-4 p-lg-5 d-flex flex-column h-100">
+                                        <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
+                                            <span class="badge rounded-pill px-3 py-2" style="background-color: #eef5fb; color: #0a1a2f;">Cultural</span>
+                                            <span class="small text-secondary">Lectura de 5 min</span>
+                                        </div>
+                                        <h2 class="display-6 fw-bold mb-3" style="color: #0a1a2f;">48 horas en una capital llena de historia, arte y cafe</h2>
+                                        <p class="text-secondary mb-4">
+                                            Un recorrido editorial por barrios, museos y espacios que hacen del viaje una experiencia urbana intensa y memorable.
+                                        </p>
+                                        <div class="mt-auto d-flex justify-content-between align-items-center flex-wrap gap-2">
+                                            <span class="small text-secondary"><i class="bi bi-calendar3 me-2"></i>27 abril 2026</span>
+                                            <a href="#blog-comments-section" class="fw-semibold text-decoration-none" style="color: #00a2d6;">Leer comentarios</a>
+                                        </div>
+                                        <div class="d-flex flex-wrap gap-2 mt-4">
+                                            <button type="button" class="btn btn-sm fw-semibold article-comments-toggle" style="background-color: #eef5fb; color: #0a1a2f;" data-target="#article-comments-1">Ver comentarios</button>
+                                            <button type="button" class="btn btn-sm fw-semibold article-like-toggle" style="background-color: #ffffff; color: #0a1a2f; border: 1px solid #d4e3ef;">
+                                                <i class="bi bi-heart me-1"></i><span class="like-label">Me interesa</span>
+                                            </button>
+                                        </div>
+                                        <div class="article-comments-box mt-3" id="article-comments-1" style="display: none;">
+                                            <div class="rounded-4 p-3" style="background-color: #f7fbff;">
+                                                <p class="small text-secondary mb-2"><strong style="color: #0a1a2f;">Aurora L.</strong> La nota sobre rutas culturales me dio varias ideas para mi proximo viaje.</p>
+                                                <p class="small text-secondary mb-0"><strong style="color: #0a1a2f;">Lina P.</strong> Me gusto mucho el enfoque visual y la seleccion de lugares.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-12 col-md-6 blog-post" data-category="aventura">
+                        <article class="card border-0 rounded-5 overflow-hidden h-100 scroll-reveal blog-hover-card" style="box-shadow: 0 18px 36px rgba(10, 26, 47, 0.10); transition: transform 0.35s ease, box-shadow 0.35s ease;">
+                            <img
+                                src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=80"
+                                alt="Persona haciendo trekking entre montanas"
+                                class="w-100"
+                                style="height: 240px; object-fit: cover;"
+                            >
+                            <div class="card-body p-4">
+                                <span class="badge rounded-pill px-3 py-2 mb-3" style="background-color: #eef5fb; color: #0a1a2f;">Aventura</span>
+                                <h3 class="fs-4 fw-bold mb-3" style="color: #0a1a2f;">Senderos que cambian con la luz del dia</h3>
+                                <p class="text-secondary mb-3">Lagos, bosques y rutas escenicas para una escapada activa.</p>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <button type="button" class="btn btn-sm fw-semibold article-comments-toggle" style="background-color: #eef5fb; color: #0a1a2f;" data-target="#article-comments-2">Ver comentarios</button>
+                                    <button type="button" class="btn btn-sm fw-semibold article-like-toggle" style="background-color: #ffffff; color: #0a1a2f; border: 1px solid #d4e3ef;">
+                                        <i class="bi bi-heart me-1"></i><span class="like-label">Me interesa</span>
+                                    </button>
+                                </div>
+                                <div class="article-comments-box mt-3" id="article-comments-2" style="display: none;">
+                                    <div class="rounded-4 p-3" style="background-color: #f7fbff;">
+                                        <p class="small text-secondary mb-2"><strong style="color: #0a1a2f;">Marco T.</strong> Estaria bueno sumar mas articulos de trekking.</p>
+                                        <p class="small text-secondary mb-0"><strong style="color: #0a1a2f;">Camila R.</strong> La seccion de aventura ya se siente muy bien curada.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-12 col-md-6 blog-post" data-category="gastronomia">
+                        <article class="card border-0 rounded-5 overflow-hidden h-100 scroll-reveal blog-hover-card" style="box-shadow: 0 18px 36px rgba(10, 26, 47, 0.10); transition: transform 0.35s ease, box-shadow 0.35s ease;">
+                            <img
+                                src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=80"
+                                alt="Mesa servida con platos regionales"
+                                class="w-100"
+                                style="height: 240px; object-fit: cover;"
+                            >
+                            <div class="card-body p-4">
+                                <span class="badge rounded-pill px-3 py-2 mb-3" style="background-color: #eef5fb; color: #0a1a2f;">Gastronomia</span>
+                                <h3 class="fs-4 fw-bold mb-3" style="color: #0a1a2f;">Sabores regionales que justifican el viaje</h3>
+                                <p class="text-secondary mb-3">Restaurantes, mercados y bodegas para descubrir con tiempo.</p>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <button type="button" class="btn btn-sm fw-semibold article-comments-toggle" style="background-color: #eef5fb; color: #0a1a2f;" data-target="#article-comments-3">Ver comentarios</button>
+                                    <button type="button" class="btn btn-sm fw-semibold article-like-toggle" style="background-color: #ffffff; color: #0a1a2f; border: 1px solid #d4e3ef;">
+                                        <i class="bi bi-heart me-1"></i><span class="like-label">Me interesa</span>
+                                    </button>
+                                </div>
+                                <div class="article-comments-box mt-3" id="article-comments-3" style="display: none;">
+                                    <div class="rounded-4 p-3" style="background-color: #f7fbff;">
+                                        <p class="small text-secondary mb-2"><strong style="color: #0a1a2f;">Diego M.</strong> Muy buena seleccion de mercados y lugares para comer.</p>
+                                        <p class="small text-secondary mb-0"><strong style="color: #0a1a2f;">Paula S.</strong> Este tipo de nota da ganas de planear el viaje alrededor de la comida.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-12 col-md-6 blog-post" data-category="relax">
+                        <article class="card border-0 rounded-5 overflow-hidden h-100 scroll-reveal blog-hover-card" style="box-shadow: 0 18px 36px rgba(10, 26, 47, 0.10); transition: transform 0.35s ease, box-shadow 0.35s ease;">
+                            <img
+                                src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80"
+                                alt="Playa tranquila con mar calmo"
+                                class="w-100"
+                                style="height: 240px; object-fit: cover;"
+                            >
+                            <div class="card-body p-4">
+                                <span class="badge rounded-pill px-3 py-2 mb-3" style="background-color: #eef5fb; color: #0a1a2f;">Relax</span>
+                                <h3 class="fs-4 fw-bold mb-3" style="color: #0a1a2f;">Playas tranquilas para desconectar sin apuro</h3>
+                                <p class="text-secondary mb-3">Un itinerario sereno para bajar el ritmo y descansar.</p>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <button type="button" class="btn btn-sm fw-semibold article-comments-toggle" style="background-color: #eef5fb; color: #0a1a2f;" data-target="#article-comments-4">Ver comentarios</button>
+                                    <button type="button" class="btn btn-sm fw-semibold article-like-toggle" style="background-color: #ffffff; color: #0a1a2f; border: 1px solid #d4e3ef;">
+                                        <i class="bi bi-heart me-1"></i><span class="like-label">Me interesa</span>
+                                    </button>
+                                </div>
+                                <div class="article-comments-box mt-3" id="article-comments-4" style="display: none;">
+                                    <div class="rounded-4 p-3" style="background-color: #f7fbff;">
+                                        <p class="small text-secondary mb-2"><strong style="color: #0a1a2f;">Julieta V.</strong> Ideal para guardar y leer antes de unas vacaciones cortas.</p>
+                                        <p class="small text-secondary mb-0"><strong style="color: #0a1a2f;">Sofia P.</strong> Me gusto que el enfoque vaya directo al descanso y no al itinerario apretado.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-12 col-md-6 blog-post" data-category="cultural gastronomia">
+                        <article class="card border-0 rounded-5 overflow-hidden h-100 scroll-reveal blog-hover-card" style="box-shadow: 0 18px 36px rgba(10, 26, 47, 0.10); transition: transform 0.35s ease, box-shadow 0.35s ease;">
+                            <img
+                                src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=900&q=80"
+                                alt="Ciudad iluminada al atardecer"
+                                class="w-100"
+                                style="height: 240px; object-fit: cover;"
+                            >
+                            <div class="card-body p-4">
+                                <span class="badge rounded-pill px-3 py-2 mb-3" style="background-color: #eef5fb; color: #0a1a2f;">Cultural y Gastronomia</span>
+                                <h3 class="fs-4 fw-bold mb-3" style="color: #0a1a2f;">Una ciudad para caminar, mirar y probar</h3>
+                                <p class="text-secondary mb-3">Calles con historia, arquitectura y cocina local en cada esquina.</p>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <button type="button" class="btn btn-sm fw-semibold article-comments-toggle" style="background-color: #eef5fb; color: #0a1a2f;" data-target="#article-comments-5">Ver comentarios</button>
+                                    <button type="button" class="btn btn-sm fw-semibold article-like-toggle" style="background-color: #ffffff; color: #0a1a2f; border: 1px solid #d4e3ef;">
+                                        <i class="bi bi-heart me-1"></i><span class="like-label">Me interesa</span>
+                                    </button>
+                                </div>
+                                <div class="article-comments-box mt-3" id="article-comments-5" style="display: none;">
+                                    <div class="rounded-4 p-3" style="background-color: #f7fbff;">
+                                        <p class="small text-secondary mb-2"><strong style="color: #0a1a2f;">Lina P.</strong> Me encanta cuando una ciudad mezcla historia y gastronomia en el mismo recorrido.</p>
+                                        <p class="small text-secondary mb-0"><strong style="color: #0a1a2f;">Aurora L.</strong> Esta nota resume muy bien el estilo revista del blog.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-12 d-none" id="blog-empty-state">
+                        <div class="card border-0 rounded-5 p-4 text-center" style="box-shadow: 0 18px 36px rgba(10, 26, 47, 0.08);">
+                            <h3 class="fs-4 fw-bold mb-2" style="color: #0a1a2f;">No hay notas para esta categoria.</h3>
+                            <p class="text-secondary mb-0">Probá otra etiqueta para seguir explorando contenidos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-xl-4">
+                <aside class="card border-0 rounded-5 p-4 p-lg-5 scroll-reveal" style="background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%); box-shadow: 0 18px 36px rgba(10, 26, 47, 0.10);">
+                    <span class="text-uppercase small fw-semibold mb-3" style="letter-spacing: 0.12em; color: #00a2d6;">Radar editorial</span>
+                    <h2 class="fs-3 fw-bold mb-3" style="color: #0a1a2f;">Notas destacadas</h2>
+                    <p class="text-secondary mb-4">
+                        Una mirada editorial sobre viajes, experiencias y rincones para descubrir desde diferentes estilos de viaje.
+                    </p>
+
+                    <ul class="list-unstyled mb-4">
+                        <li class="py-3 border-bottom"><a href="#" class="text-decoration-none fw-semibold" style="color: #0a1a2f;">Rutas culturales con museos, barrios y cafes para una escapada urbana.</a></li>
+                        <li class="py-3 border-bottom"><a href="#" class="text-decoration-none fw-semibold" style="color: #0a1a2f;">Destinos de aventura con lagos, bosques y recorridos escenicos.</a></li>
+                        <li class="py-3"><a href="#" class="text-decoration-none fw-semibold" style="color: #0a1a2f;">Postales de relax y gastronomia para viajar sin apuro.</a></li>
+                    </ul>
+
+                    <div class="rounded-4 p-4 text-white mt-3" style="background: linear-gradient(135deg, #0fb2e5 0%, #12324a 100%);">
+                        <h3 class="fs-5 fw-bold mb-2">Explora por categoria</h3>
+                        <p class="mb-0" style="color: #eafcff;">Usa los filtros para ver solo notas culturales, de aventura, gastronomia o relax y despues desplega comentarios en cada tarjeta.</p>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</section>

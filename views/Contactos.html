@@ -1,18 +1,665 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contactos</title>
+    <title>Brujula Sur | Contacto</title>
     <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.min.css">
+    <style>
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .scroll-reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
-<body>
-    <main class="container py-5">
-        <h1 class="display-6 fw-bold">Contactos</h1>
-        <p class="text-body-secondary">Esta vista ya tiene Bootstrap y jQuery disponibles.</p>
+
+<body class="d-flex flex-column min-vh-100" style="background-color: #f4f8fb;">
+    <div id="navbar"></div>
+
+    <main class="flex-grow-1">
+        <div id="contact-hero"></div>
+        <div id="contact-form-section"></div>
     </main>
+
+    <div id="footer"></div>
+
+    <div class="modal fade" id="contactSuccessModal" tabindex="-1" aria-labelledby="contactSuccessModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 rounded-5 p-2" style="box-shadow: 0 20px 40px rgba(10, 26, 47, 0.18);">
+                <div class="modal-body text-center p-4 p-lg-5">
+                    <div class="mb-3">
+                        <span class="d-inline-flex align-items-center justify-content-center rounded-circle"
+                            style="width: 72px; height: 72px; background-color: #eefbff; color: #00a2d6;">
+                            <i class="bi bi-check2-circle fs-1"></i>
+                        </span>
+                    </div>
+                    <h2 class="fs-2 fw-bold mb-3" id="contactSuccessModalLabel" style="color: #0a1a2f;">Mensaje Enviado
+                    </h2>
+                    <p class="text-secondary mb-2">Gracias por tu mensaje. Nos pondremos en contacto pronto.</p>
+                    <p class="small text-secondary mb-4">Te responderemos en las proximas 24 horas.</p>
+                    <button type="button" class="btn btn-lg fw-semibold px-4" data-bs-dismiss="modal"
+                        style="background-color: #00c3ff; color: #0a1a2f;">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="phishingEducationModal" tabindex="-1" aria-labelledby="phishingEducationModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 rounded-5 overflow-hidden"
+                style="box-shadow: 0 24px 48px rgba(10, 26, 47, 0.2);">
+                <div class="modal-header border-0 p-4 p-lg-5 pb-3"
+                    style="background: linear-gradient(135deg, #12324a 0%, #0a1a2f 100%);">
+                    <div class="text-white">
+                        <span class="badge rounded-pill px-3 py-2 mb-3"
+                            style="background-color: rgba(255,255,255,0.12);">Modulo educativo</span>
+                        <h2 class="fs-2 fw-bold mb-2" id="phishingEducationModalLabel">Simulacion de phishing</h2>
+                        <p class="mb-0" style="color: #d6e6f3;">
+                            Material educativo. No ingreses datos reales. El objetivo es reconocer señales de fraude y
+                            practicar una deteccion segura.
+                        </p>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white ms-3" data-bs-dismiss="modal"
+                        aria-label="Cerrar"></button>
+                </div>
+
+                <div class="modal-body p-4 p-lg-5">
+                    <div class="alert border-0 rounded-4 mb-4" style="background-color: #fff4d6; color: #5c4300;">
+                        <strong>Advertencia clara:</strong> esta simulacion es exclusivamente educativa y no debe usarse
+                        para recolectar credenciales ni datos personales reales.
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-12 ">
+                            <div class="rounded-4 p-4 h-100"
+                                style="background-color: #f7fbff; border: 1px solid #d4e3ef;">
+                                <h3 class="fs-5 fw-bold mb-3" style="color: #0a1a2f;">Ejemplo educativo</h3>
+                                <div class="rounded-4 overflow-hidden"
+                                    style="background-color: #f3f3f3; border: 1px solid #d8d8d8;">
+                                    <div class="px-3 py-2 small" style="background-color: #e9ecef; color: #495057;">
+                                        http://bancoseguro-verificacion-login.xyz
+                                    </div>
+                                    <div class="p-4"
+                                        style="background: linear-gradient(180deg, #ffffff 0%, #f6f6f6 100%);">
+                                        <div class="text-center mb-3">
+                                            <div class="fw-bold" style="font-size: 1.1rem; color: #1f1f1f;">Banco Seguro
+                                                Online</div>
+                                            <div class="small text-danger fw-semibold">Acceso urgente requerido</div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label small text-uppercase mb-1"
+                                                style="color: #666;">Usuario o Email</label>
+                                            <input type="text" class="form-control" value="cliente@ejemplo.com"
+                                                disabled>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label small text-uppercase mb-1"
+                                                style="color: #666;">Clave bancaria</label>
+                                            <input type="password" class="form-control" value="12345678" disabled>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label small text-uppercase mb-1"
+                                                style="color: #666;">Token / DNI / Tarjeta</label>
+                                            <input type="text" class="form-control"
+                                                value="Solicitado en una sola pantalla" disabled>
+                                        </div>
+
+                                        <button type="button" class="btn w-100 fw-semibold"
+                                            style="background-color: #d63384; color: #ffffff;" disabled>
+                                            Verificar cuenta ahora
+                                        </button>
+
+                                        <p class="small text-danger fw-semibold mt-3 mb-0 text-center">
+                                            Si no validas en 10 minutos tu cuenta sera suspendida.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 ">
+                            <div class="rounded-4 p-4 h-100"
+                                style="background-color: #f7fbff; border: 1px solid #d4e3ef;">
+                                <h3 class="fs-5 fw-bold mb-3" style="color: #0a1a2f;">Tu analisis</h3>
+                                <p class="text-secondary mb-0">
+                                    Observa el login, responde la actividad y luego revisa las señales de fraude
+                                    detectadas por el modulo educativo.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="rounded-4 p-4" style="background-color: #ffffff; border: 1px solid #d4e3ef;">
+                                <h3 class="fs-5 fw-bold mb-3" style="color: #0a1a2f;">Actividad: identifica los errores
+                                </h3>
+                                <p class="text-secondary mb-3">Marca las opciones que hacen sospechoso al login del
+                                    ejemplo.</p>
+
+                                <div class="row g-3" id="phishing-quiz">
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-check rounded-4 p-3 h-100"
+                                            style="background-color: #f7fbff; border: 1px solid #d4e3ef;">
+                                            <input class="form-check-input phishing-option" type="checkbox" value="http"
+                                                data-correct="true">
+                                            <span class="form-check-label ms-2">La URL usa http en lugar de
+                                                https.</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-check rounded-4 p-3 h-100"
+                                            style="background-color: #f7fbff; border: 1px solid #d4e3ef;">
+                                            <input class="form-check-input phishing-option" type="checkbox"
+                                                value="urgency" data-correct="true">
+                                            <span class="form-check-label ms-2">El mensaje usa urgencia para presionar
+                                                al usuario.</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-check rounded-4 p-3 h-100"
+                                            style="background-color: #f7fbff; border: 1px solid #d4e3ef;">
+                                            <input class="form-check-input phishing-option" type="checkbox"
+                                                value="data-request" data-correct="true">
+                                            <span class="form-check-label ms-2">Solicita demasiados datos sensibles en
+                                                el mismo login.</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-check rounded-4 p-3 h-100"
+                                            style="background-color: #f7fbff; border: 1px solid #d4e3ef;">
+                                            <input class="form-check-input phishing-option" type="checkbox"
+                                                value="domain" data-correct="true">
+                                            <span class="form-check-label ms-2">El dominio parece imitacion y no uno
+                                                oficial.</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-check rounded-4 p-3 h-100"
+                                            style="background-color: #f7fbff; border: 1px solid #d4e3ef;">
+                                            <input class="form-check-input phishing-option" type="checkbox" value="safe"
+                                                data-correct="false">
+                                            <span class="form-check-label ms-2">Como tiene campos de login, entonces
+                                                debe ser legitimo.</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-column flex-sm-row gap-3 mt-4">
+                                    <button type="button" class="btn fw-semibold px-4" id="phishing-check-btn"
+                                        style="background-color: #00c3ff; color: #0a1a2f;">Revisar respuestas</button>
+                                    <button type="button" class="btn btn-outline-secondary px-4"
+                                        id="phishing-reset-btn">Reiniciar</button>
+                                </div>
+
+                                <div id="phishing-feedback" class="mt-3 fw-semibold"></div>
+
+                                <div id="phishing-signals-box" class="rounded-4 p-4 mt-4"
+                                    style="display: none; background-color: #f7fbff; border: 1px solid #d4e3ef;">
+                                    <h4 class="fs-5 fw-bold mb-3" style="color: #0a1a2f;">Senales de fraude</h4>
+                                    <ul class="mb-0 ps-3 text-secondary">
+                                        <li>La direccion usa <strong>http</strong> y no <strong>https</strong>.</li>
+                                        <li>El dominio no coincide con una entidad oficial reconocible.</li>
+                                        <li>Pide demasiados datos sensibles en una sola pantalla.</li>
+                                        <li>Usa urgencia y amenaza de suspension para presionar.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(function () {
+            const initMobileNavbarPersistence = function () {
+                const collapseElement = document.getElementById("navbarBrujulaSur");
+
+                if (!collapseElement) {
+                    return;
+                }
+
+                const collapseInstance = bootstrap.Collapse.getOrCreateInstance(collapseElement, {
+                    toggle: false
+                });
+                const storageKey = "brujula-sur-navbar-open";
+
+                if (window.innerWidth < 992 && window.localStorage.getItem(storageKey) === "true") {
+                    collapseElement.classList.remove("collapsing");
+                    collapseElement.classList.add("show");
+                }
+
+                collapseElement.addEventListener("shown.bs.collapse", function () {
+                    window.localStorage.setItem(storageKey, "true");
+                });
+
+                collapseElement.addEventListener("hidden.bs.collapse", function () {
+                    window.localStorage.setItem(storageKey, "false");
+                });
+            };
+
+            $("#navbar").load("../components/navbar.html", function () {
+                initMobileNavbarPersistence();
+                const links = $("#navbar .nav-link");
+                const brandLink = $("#navbar .navbar-brand");
+                const currentPage = window.location.pathname.split("/").pop();
+                const storageKey = "brujula-sur-navbar-open";
+
+                links.removeClass("bg-white bg-opacity-10");
+                links.css("color", "#ffffff");
+
+                const activeLink = links.filter(function () {
+                    return $(this).attr("href").split("/").pop() === currentPage;
+                }).first();
+
+                activeLink.addClass("bg-white bg-opacity-10");
+                activeLink.css("color", "#8fe7ff");
+
+                links.on("click", function (event) {
+                    const targetPage = $(this).attr("href").split("/").pop();
+
+                    if (window.innerWidth < 992 && $("#navbarBrujulaSur").hasClass("show")) {
+                        window.localStorage.setItem(storageKey, "true");
+                    }
+
+                    if (targetPage === currentPage) {
+                        event.preventDefault();
+                    }
+                });
+
+                brandLink.on("click", function (event) {
+                    const targetPage = $(this).attr("href").split("/").pop();
+
+                    if (window.innerWidth < 992 && $("#navbarBrujulaSur").hasClass("show")) {
+                        window.localStorage.setItem(storageKey, "true");
+                    }
+
+                    if (targetPage === currentPage) {
+                        event.preventDefault();
+                    }
+                });
+            });
+
+            $("#contact-hero").load("../components/contact-hero.html");
+
+            $("#contact-form-section").load("../components/contact-form.html", function () {
+                const successModal = new bootstrap.Modal(document.getElementById("contactSuccessModal"));
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                const phonePattern = /^[0-9+\-()\s]*$/;
+                const suspiciousPattern = /<script|<\/script|javascript:|onerror=|onload=|<|>|["'`;{}]/gi;
+                const simulatedDelayMs = 1800;
+                let isSubmitting = false;
+
+                const setStatus = function (text, color) {
+                    $("#contact-form-status").text(text).css("color", color);
+                };
+
+                const setSubmittingState = function (submitting) {
+                    isSubmitting = submitting;
+                    $("#contact-submit-btn").prop("disabled", submitting);
+                    $("#contact-reset-btn").prop("disabled", submitting);
+                    $("#contact-form .form-control, #contact-form .form-select, #contact-terms").prop("disabled", submitting);
+
+                    if (submitting) {
+                        $("#contact-submit-btn").css("opacity", "0.92");
+                        $(".btn-submit-text").text("Enviando...");
+                        $("#contact-submit-spinner").stop(true, true).show();
+                    } else {
+                        $("#contact-submit-btn").css("opacity", "1");
+                        $(".btn-submit-text").text("Enviar Mensaje");
+                        $("#contact-submit-spinner").stop(true, true).hide();
+                    }
+                };
+
+                const setFieldState = function (fieldId, isValid) {
+                    const field = $(`#${fieldId}`);
+                    const message = $(`.validation-message[data-for='${fieldId}']`);
+
+                    field.toggleClass("is-invalid", !isValid);
+                    field.toggleClass("is-valid", isValid && field.val() !== "");
+                    message.toggleClass("d-none", isValid);
+                };
+
+                const sanitizeName = function (value) {
+                    return String(value ?? "")
+                        .replace(suspiciousPattern, "")
+                        .replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, "")
+                        .replace(/\s{2,}/g, " ")
+                        .trim();
+                };
+
+                const sanitizeEmail = function (value) {
+                    return String(value ?? "")
+                        .replace(/<script|<\/script|javascript:|onerror=|onload=/gi, "")
+                        .replace(/[<>"'`\s]/g, "")
+                        .trim()
+                        .toLowerCase();
+                };
+
+                const sanitizePhone = function (value) {
+                    return String(value ?? "")
+                        .replace(suspiciousPattern, "")
+                        .replace(/[^0-9+\-()\s]/g, "")
+                        .replace(/\s{2,}/g, " ")
+                        .trim();
+                };
+
+                const sanitizeMessage = function (value) {
+                    return String(value ?? "")
+                        .replace(/<script|<\/script|javascript:|onerror=|onload=/gi, "")
+                        .replace(/[<>`{}]/g, "")
+                        .replace(/\s{3,}/g, "  ")
+                        .trim();
+                };
+
+                const validateField = function (fieldId) {
+                    const field = $(`#${fieldId}`);
+                    let value = String(field.val() ?? "").trim();
+
+                    if (fieldId === "contact-name") {
+                        value = sanitizeName(value);
+                    }
+
+                    if (fieldId === "contact-email") {
+                        value = sanitizeEmail(value);
+                    }
+
+                    if (fieldId === "contact-phone") {
+                        value = sanitizePhone(value);
+                    }
+
+                    if (fieldId === "contact-message") {
+                        value = sanitizeMessage(value);
+                    }
+
+                    if (String(field.val()) !== value) {
+                        field.val(value);
+                    }
+
+                    if (fieldId === "contact-name") {
+                        const valid = value.length >= 3 && /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(value);
+                        setFieldState(fieldId, valid);
+                        return valid;
+                    }
+
+                    if (fieldId === "contact-email") {
+                        const valid = emailPattern.test(value);
+                        setFieldState(fieldId, valid);
+                        return valid;
+                    }
+
+                    if (fieldId === "contact-phone") {
+                        const valid = value === "" || phonePattern.test(value);
+                        setFieldState(fieldId, valid);
+                        return valid;
+                    }
+
+                    if (fieldId === "contact-subject") {
+                        const valid = value !== "";
+                        setFieldState(fieldId, valid);
+                        return valid;
+                    }
+
+                    if (fieldId === "contact-message") {
+                        const valid = value.length >= 10;
+                        setFieldState(fieldId, valid);
+                        return valid;
+                    }
+
+                    return true;
+                };
+
+                const validateTerms = function () {
+                    const checked = $("#contact-terms").is(":checked");
+                    const message = $(".validation-message[data-for='contact-terms']");
+
+                    $("#contact-terms").toggleClass("is-invalid", !checked);
+                    message.toggleClass("d-none", checked);
+
+                    return checked;
+                };
+
+                const resetFormState = function () {
+                    $("#contact-form")[0].reset();
+                    $("#contact-char-count").text("0");
+                    $("#contact-feedback").text("");
+                    $(".validation-message").addClass("d-none");
+                    $("#contact-form .form-control, #contact-form .form-select, #contact-terms").removeClass("is-invalid is-valid");
+                    setSubmittingState(false);
+                    setStatus("Esperando datos para enviar.", "#00a2d6");
+                };
+
+                $("#contact-message").on("input", function () {
+                    const cleanValue = sanitizeMessage($(this).val());
+
+                    if ($(this).val() !== cleanValue) {
+                        $(this).val(cleanValue);
+                    }
+
+                    $("#contact-char-count").text($(this).val().length);
+                    validateField("contact-message");
+                    setStatus("Validando mensaje en tiempo real...", "#00a2d6");
+                });
+
+                $("#contact-name, #contact-email, #contact-phone").on("input", function () {
+                    const field = $(this);
+                    const fieldId = field.attr("id");
+
+                    if (fieldId === "contact-name") {
+                        field.val(sanitizeName(field.val()));
+                    }
+
+                    if (fieldId === "contact-email") {
+                        field.val(sanitizeEmail(field.val()));
+                    }
+
+                    if (fieldId === "contact-phone") {
+                        field.val(sanitizePhone(field.val()));
+                    }
+
+                    validateField($(this).attr("id"));
+                    setStatus("Revisando datos del formulario...", "#00a2d6");
+                });
+
+                $("#contact-subject").on("change", function () {
+                    validateField("contact-subject");
+                });
+
+                $("#contact-terms").on("change", function () {
+                    validateTerms();
+                });
+
+                $("#contact-reset-btn").on("click", function () {
+                    resetFormState();
+                });
+
+                $("#contact-form").on("submit", function (event) {
+                    event.preventDefault();
+
+                    if (isSubmitting) {
+                        return;
+                    }
+
+                    const validName = validateField("contact-name");
+                    const validEmail = validateField("contact-email");
+                    const validPhone = validateField("contact-phone");
+                    const validSubject = validateField("contact-subject");
+                    const validMessage = validateField("contact-message");
+                    const validTerms = validateTerms();
+
+                    if (!(validName && validEmail && validPhone && validSubject && validMessage && validTerms)) {
+                        $("#contact-feedback").css("color", "#dc3545").text("Revisa los campos marcados antes de enviar.");
+                        setStatus("Hay campos pendientes o invalidos.", "#dc3545");
+                        return;
+                    }
+
+                    $("#contact-feedback").css("color", "#00a2d6").text("Formulario validado correctamente.");
+                    setStatus("Enviando mensaje...", "#00a2d6");
+                    setSubmittingState(true);
+
+                    window.setTimeout(() => {
+                        successModal.show();
+                        this.reset();
+                        $("#contact-char-count").text("0");
+                        $("#contact-form .form-control, #contact-form .form-select, #contact-terms").removeClass("is-invalid is-valid");
+                        $(".validation-message").addClass("d-none");
+                        $("#contact-feedback").css("color", "#00a2d6").text("Mensaje enviado con exito.");
+                        setStatus("Mensaje enviado correctamente.", "#198754");
+                        setSubmittingState(false);
+                    }, simulatedDelayMs);
+                });
+
+                $("#phishing-check-btn").on("click", function () {
+                    const options = $(".phishing-option");
+                    let allCorrect = true;
+                    let selectedAny = false;
+
+                    options.each(function () {
+                        const option = $(this);
+                        const checked = option.is(":checked");
+                        const correct = String(option.data("correct")) === "true";
+                        const wrapper = option.closest("label");
+
+                        wrapper.css({
+                            "border-color": "#d4e3ef",
+                            "background-color": "#f7fbff"
+                        });
+
+                        if (checked) {
+                            selectedAny = true;
+                        }
+
+                        if ((checked && !correct) || (!checked && correct)) {
+                            allCorrect = false;
+                        }
+
+                        if (checked && correct) {
+                            wrapper.css({
+                                "border-color": "#198754",
+                                "background-color": "#ecf9f1"
+                            });
+                        }
+
+                        if (checked && !correct) {
+                            wrapper.css({
+                                "border-color": "#dc3545",
+                                "background-color": "#fff1f2"
+                            });
+                        }
+                    });
+
+                    if (!selectedAny) {
+                        $("#phishing-feedback")
+                            .css("color", "#dc3545")
+                            .text("Selecciona al menos una opcion para recibir feedback.");
+                        $("#phishing-signals-box").stop(true, true).hide();
+                        return;
+                    }
+
+                    if (allCorrect) {
+                        $("#phishing-feedback")
+                            .css("color", "#198754")
+                            .text("Correcto: identificaste las principales señales de fraude del login sospechoso.");
+                    } else {
+                        $("#phishing-feedback")
+                            .css("color", "#dc3545")
+                            .text("Hay respuestas para revisar. Recuerda: http, dominio imitacion, urgencia y pedido excesivo de datos son señales clave.");
+                    }
+
+                    $("#phishing-signals-box").stop(true, true).slideDown(180);
+                });
+
+                $("#phishing-reset-btn").on("click", function () {
+                    $(".phishing-option").prop("checked", false);
+                    $("#phishing-feedback").text("");
+                    $("#phishing-signals-box").stop(true, true).slideUp(150);
+                    $("#phishing-quiz label").css({
+                        "border-color": "#d4e3ef",
+                        "background-color": "#f7fbff"
+                    });
+                });
+
+                initializeScrollReveal();
+            });
+
+            $("#footer").load("../components/footer.html", function () {
+                const newsletterInput = $("#footer input[type='email']").first();
+                const newsletterForm = newsletterInput.closest("form");
+
+                newsletterInput.on("input", function () {
+                    const cleanValue = String($(this).val() ?? "")
+                        .replace(/<script|<\/script|javascript:|onerror=|onload=/gi, "")
+                        .replace(/[<>"'`\s]/g, "")
+                        .toLowerCase();
+
+                    $(this).val(cleanValue);
+                });
+
+                newsletterForm.on("submit", function (event) {
+                    event.preventDefault();
+                    const email = String(newsletterInput.val() ?? "").trim();
+
+                    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                        newsletterInput.addClass("is-invalid");
+                        return;
+                    }
+
+                    newsletterInput.removeClass("is-invalid").addClass("is-valid");
+                    this.reset();
+                    newsletterInput.removeClass("is-valid");
+                });
+            });
+
+            function initializeScrollReveal() {
+                const elements = document.querySelectorAll(".scroll-reveal:not(.reveal-bound)");
+
+                if (!elements.length) {
+                    return;
+                }
+
+                if (!("IntersectionObserver" in window)) {
+                    elements.forEach((element) => {
+                        element.classList.add("is-visible");
+                        element.classList.add("reveal-bound");
+                    });
+                    return;
+                }
+
+                const observer = new IntersectionObserver((entries, currentObserver) => {
+                    entries.forEach((entry) => {
+                        if (!entry.isIntersecting) {
+                            return;
+                        }
+
+                        entry.target.classList.add("is-visible");
+                        currentObserver.unobserve(entry.target);
+                    });
+                }, {
+                    threshold: 0.18
+                });
+
+                elements.forEach((element) => {
+                    element.classList.add("reveal-bound");
+                    observer.observe(element);
+                });
+            }
+        });
+    </script>
 </body>
+
 </html>
