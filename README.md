@@ -49,6 +49,9 @@ npm run deploy:gh
 
 Este comando ejecuta el build y publica la carpeta `dist/`.
 
+### Link video de presentacion
+https://drive.google.com/file/d/1E-ECYsUSIuRZNpKYJS6jx6U0Plx_4Lxy/view?usp=sharing
+
 ## Documentacion tecnica
 
 ### 1. Descripcion general
