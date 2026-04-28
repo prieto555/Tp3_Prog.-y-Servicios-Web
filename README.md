@@ -1,4 +1,6 @@
-#Video de presentacion
+# Integrantes : Paredes Francisco, Prieto Gabriel
+
+# Video de presentacion
 
 https://drive.google.com/file/d/1E-ECYsUSIuRZNpKYJS6jx6U0Plx_4Lxy/view
 
